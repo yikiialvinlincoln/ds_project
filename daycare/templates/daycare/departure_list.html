@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Departure List</title>
+</head>
+<body>
+    <h1>Departure List</h1>
+    <ul>
+        {% for departure in departures %}
+            <li>{{ departure.departure_time }} - {{ departure.baby.b_name }} (Parents Names: {{ departure.parents_names }})
+                <a href="{% url 'departure_edit' departure_id=departure.id %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'departure_delete' departure_id=departure.id %}" class="btn btn-danger">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

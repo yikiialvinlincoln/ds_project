@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Baby Details</title>
+</head>
+<body>
+    <h1>Baby Details</h1>
+    <ul>
+        <li><strong>Name:</strong> {{ baby.b_name }}</li>
+        <li><strong>Gender:</strong> {{ baby.gender }}</li>
+        <li><strong>Age:</strong> {{ baby.age }}</li>
+        <li><strong>Location:</strong> {{ baby.location }}</li>
+        <li><strong>Parents Names:</strong> {{ baby.parents_names }}</li>
+        <li><strong>Fee:</strong> {{ baby.fee }}</li>
+        <li><strong>Period of Stay:</strong> {{ baby.period_of_stay }}</li>
+        <li><strong>Baby Number:</strong> {{ baby.baby_number }}</li>
+    </ul>
+    <a href="{% url 'baby_edit' baby_id=baby.id %}" class="btn btn-primary">Edit</a>
+    <a href="{% url 'baby_delete' baby_id=baby.id %}" class="btn btn-danger">Delete</a>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sitter List</title>
+</head>
+<body>
+    <h1>Sitter List</h1>
+    <a href="{% url 'new_sitter' %}" class="btn btn-primary">Add Sitter</a>
+    <ul>
+        {% for sitter in sitters %}
+            <li>{{ sitter.s_name }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

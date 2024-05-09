@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Arrival List</title>
+</head>
+<body>
+    <h1>Arrival List</h1>
+    <ul>
+        {% for arrival in arrivals %}
+            <li>{{ arrival.arrival_time }} - {{ arrival.baby.b_name }} (Brought by: {{ arrival.brought_by }})
+                <a href="{% url 'arrival_edit' arrival_id=arrival.id %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'arrival_delete' arrival_id=arrival.id %}" class="btn btn-danger">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Item List</title>
+</head>
+<body>
+    <h1>Item List</h1>
+    <ul>
+        {% for item in items %}
+            <li>{{ item.item_name }} - Quantity: {{ item.quantity }} - Unit Price: {{ item.unit_price }}
+                <a href="{% url 'item_edit' item_id=item.id %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'item_delete' item_id=item.id %}" class="btn btn-danger">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

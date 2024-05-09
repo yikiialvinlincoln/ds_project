@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Baby List</title>
+</head>
+<body>
+    <h1>Baby List</h1>
+    <a href="{% url 'new_baby' %}" class="btn btn-primary">Add Baby</a>
+    <ul>
+        {% for baby in babies %}
+            <li>{{ baby.b_name }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

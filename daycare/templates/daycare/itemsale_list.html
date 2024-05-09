@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Item Sale List</title>
+</head>
+<body>
+    <h1>Item Sale List</h1>
+    <ul>
+        {% for itemsale in itemsales %}
+            <li>{{ itemsale.item_name }} - Quantity: {{ itemsale.quantity }} - Total Cost: {{ itemsale.total_cost }} - Payee: {{ itemsale.payee }} - Date: {{ itemsale.date }}
+                <a href="{% url 'itemsale_edit' itemsale_id=itemsale.id %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'itemsale_delete' itemsale_id=itemsale.id %}" class="btn btn-danger">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
