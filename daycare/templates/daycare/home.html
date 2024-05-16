@@ -7,13 +7,76 @@
     <title>Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        .home-cards{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 10px;
+            align-items: center;
+            gap: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1><b>Welcome to the Home Page</b></h1>
-    <p><i class="fas fa-baby"></i> Number of Babies: {{ count_babies }}</p>
-    <p><i class="fas fa-user"></i> Number of Sitters: {{ count_sitters }}</p>
-    <p><i class="fas fa-baby-carriage"></i> Number of Departures: {{ count_departure }}</p>
-    <p><i class="fas fa-calendar-check"></i> Number of Sitter Attendances: {{ count_sitterattendance }}</p>
+</br>
+    <h1 style="text-align: center; font-size: 40px;"><b>Welcome to the Home Page</b></h1>
+</br>
+</br>
+    
+
+<div class="home-cards">
+    <div class="card" style="width: 18rem;">
+        {% comment %} <img src="..." class="card-img-top" alt="..."> {% endcomment %}
+        <div class="card-body">
+          <h5 class="card-title"><i class="fas fa-baby"></i><b style="margin-left: 10px;">BABIES</b></h5>
+          <p class="card-text">Number of Babies: {{ count_babies }}</p>
+        </br>
+          <a href="{% url 'list_babies' %}" class="btn btn-secondary">View</a>
+        </div>
+      </div>
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title"><i class="fas fa-user"></i><b style="margin-left: 10px;">SITTERS</b></h5>
+          <p class="card-text">Number of Sitters: {{ count_sitters }}</p>
+        </br>
+          <a href="{% url 'list_sitters' %}" class="btn btn-secondary">View</a>
+        </div>
+      </div>
+</div>
+
+
+
+<div class="home-cards">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title"><i class="fas fa-baby-carriage"></i><b style="margin-left: 10px;">DEPARTURES</b></h5>
+          <p class="card-text">Number of Departures: {{ count_departure }}</p>
+        </br>
+          <a href="{% url 'list_departures' %}" class="btn btn-secondary">View</a>
+        </div>
+      </div>
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title"><i class="fas fa-calendar-check"></i><b style="margin-left: 10px;">ATTENDANCES</b></h5>
+          <p class="card-text">Number of Sitter Attendances: {{ count_sitterattendance }}</p>
+        </br>
+          <a href="{% url 'list_sitter_attendance' %}" class="btn btn-secondary">View</a>
+        </div>
+      </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>
 
