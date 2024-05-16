@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Sitter Attendance</title>
+</head>
+<body>
+    <h1>Confirm Delete</h1>
+    <p>Are you sure you want to delete the attendance record for {{ attendance.s_name }} on {{ attendance.date }}?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" name="action" value="delete">Delete</button>
+        <button type="submit" name="action" value="cancel">Cancel</button>
+    </form>
+</body>
+</html>

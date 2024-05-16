@@ -1,0 +1,25 @@
+{% extends 'daycare/base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doll Details</title>
+</head>
+<body>
+    <h1>Doll Details</h1>
+    <p>Name: {{ doll.doll_name }}</p>
+    <p>Type: {{ doll.t_name }}</p>
+    <p>Color: {{ doll.color }}</p>
+    <p>Size: {{ doll.size }}</p>
+    <p>Quantity: {{ doll.quantity }}</p>
+    <p>Quantity Issued: {{ doll.quantity_issued }}</p>
+    <p>Quantity Received: {{ doll.quantity_received }}</p>
+    <p>Unit Price: {{ doll.unit_price }}</p>
+    <p>Date: {{ doll.date }}</p>
+    <a href="{% url 'edit_doll' doll.id %}">Edit</a>
+    <a href="{% url 'delete_doll' doll.id %}">Delete</a>
+</body>
+</html>
+
+{% endblock %}

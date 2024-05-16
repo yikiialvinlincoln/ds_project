@@ -1,0 +1,19 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sale Details</title>
+</head>
+<body>
+    <h1>Sale Details</h1>
+    <p>Doll Name: {{ sales.doll.doll_name }}</p>
+    <p>Baby Name: {{ sales.b_name }}</p>
+    <p>Paid By: {{ sales.paid_by }}</p>
+    <p>Quantity Sold: {{ sales.quantity_sold }}</p>
+    <p>Received Amount: {{ sales.received_amount }}</p>
+    <p>Date Sold: {{ sales.date_sold }}</p>
+    <p>Unit Price: {{ sales.unit_price }}</p>
+    <a href="{% url 'edit_sales' sales.id %}">Edit</a>
+    <a href="{% url 'delete_sales' sales.id %}">Delete</a>
+</body>
+</html>

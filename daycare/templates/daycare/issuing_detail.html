@@ -1,0 +1,16 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Issuing Detail</title>
+</head>
+<body>
+    <h1>Issuing Detail</h1>
+    <p>Quantity Issued Out: {{ issuing.quantity_issued_out }}</p>
+    <p>Quantity Received: {{ issuing.quantity_received }}</p>
+    <p>Date: {{ issuing.date }}</p>
+    
+    <a href="{% url 'edit_issuing' issuing.id %}">Edit</a>
+    <a href="{% url 'delete_issuing' issuing.id %}">Delete</a>
+</body>
+</html>

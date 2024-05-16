@@ -1,3 +1,6 @@
+{% extends 'daycare/base.html' %}
+
+{% block content %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,11 +10,11 @@
     <h1>Departure List</h1>
     <ul>
         {% for departure in departures %}
-            <li>{{ departure.departure_time }} - {{ departure.baby.b_name }} (Parents Names: {{ departure.parents_names }})
-                <a href="{% url 'departure_edit' departure_id=departure.id %}" class="btn btn-primary">Edit</a>
-                <a href="{% url 'departure_delete' departure_id=departure.id %}" class="btn btn-danger">Delete</a>
-            </li>
+        <li><a href="{% url 'view_departure' departure.id %}">{{ departure.b_name }}</a></li>
         {% endfor %}
     </ul>
+    <a href="{% url 'add_departure' %}">Add Departure</a>
 </body>
 </html>
+
+{% endblock %}

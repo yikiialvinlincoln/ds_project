@@ -1,0 +1,30 @@
+{% extends 'daycare/base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Babypayment List</title>
+</head>
+<body>
+    <h1><b>Babypayment List</b></h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Baby Name</th>
+                <th>Paid On</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for babypayment in babypayments %}
+                <tr>
+                    <td>{{ babypayment.b_name }}</td>
+                    <td>{{ babypayment.paid_on }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'add_babypayment' %}" class="btn btn-primary">Add Babypayment</a>
+</body>
+</html>
+{% endblock %}

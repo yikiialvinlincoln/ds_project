@@ -1,0 +1,30 @@
+{% extends 'daycare/base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doll Types</title>
+</head>
+<body>
+    <h1>Doll Types</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Doll Type Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for doll_type in doll_types %}
+                <tr>
+                    <td>{{ doll_type.name }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <a href="{% url 'add_doll_type' %}">Add Doll Type</a>
+</body>
+</html>
+
+{% endblock %}

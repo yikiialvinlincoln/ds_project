@@ -1,0 +1,25 @@
+{% extends 'daycare/base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Details</title>
+</head>
+<body>
+    <h1>Payment Details</h1>
+    <p>Baby Name: {{ babypayment.b_name }}</p>
+    <p>Paid On: {{ babypayment.paid_on }}</p>
+    <p>Full Day: {% if babypayment.full_day %}Yes{% else %}No{% endif %}</p>
+    <p>Half Day: {% if babypayment.half_day %}Yes{% else %}No{% endif %}</p>
+    <p>Monthly (Half): {% if babypayment.monthly_h %}Yes{% else %}No{% endif %}</p>
+    <p>Monthly (Full): {% if babypayment.monthly_f %}Yes{% else %}No{% endif %}</p>
+    <p>Amount Due: {{ babypayment.amount_due }}</p>
+    <p>Paid Amount: {{ babypayment.paid_amount }}</p>
+    <p>Balance Left: {{ babypayment.balance_left }}</p>
+    
+    <a href="{% url 'edit_babypayment' babypayment.id %}">Edit</a>
+    <a href="{% url 'delete_babypayment' babypayment.id %}">Delete</a>
+</body>
+</html>
+{% endblock %}

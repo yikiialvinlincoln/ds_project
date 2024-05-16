@@ -1,0 +1,19 @@
+{% extends 'daycare/base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Doll Type</title>
+</head>
+<body>
+    <h1>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Doll Type</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>
+
+{% endblock %}

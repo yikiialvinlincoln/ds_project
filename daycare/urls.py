@@ -1,46 +1,97 @@
 from django.urls import path
 from . import views
+# from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', views.index,name='indexpage'),
+    # path('login/', auth_views.LoginView.as_view(template_name='daycare/login.html'), name='login'),
+    path('home/', views.home, name='home'),
 
     #Sitter paths
-    path('sitters/', views.sitter_list, name='sitter_list'),
-    path('new_sitter/', views.new_sitter, name='new_sitter'),
-    path('sitters/<int:sitter_id>/', views.sitter_details, name='sitter_details'),
-    path('sitter_edit/<int:sitter_id>/', views.sitter_edit, name='sitter_edit'),
-    path('sitter_delete/<int:sitter_id>/', views.sitter_delete, name='sitter_delete'),
+    path('sitters/', views.list_sitters, name='list_sitters'),
+    path('sitters/add/', views.add_sitter, name='add_sitter'),
+    path('sitters/<int:sitter_id>/', views.view_sitter, name='view_sitter'),
+    path('sitters/<int:sitter_id>/edit/', views.edit_sitter, name='edit_sitter'),
+    path('delete_sitter/<int:sitter_id>/', views.delete_sitter, name='delete_sitter'),
+    
+    #Sitter attendance paths
+    path('sitterattendance/', views.list_sitter_attendance, name='list_sitter_attendance'),
+    path('sitterattendance/add/', views.add_sitter_attendance, name='add_sitter_attendance'),
+    path('sitterattendance/<int:attendance_id>/edit/', views.edit_sitter_attendance, name='edit_sitter_attendance'),
+    path('sitterattendance/<int:attendance_id>/delete/', views.delete_sitter_attendance, name='delete_sitter_attendance'),
 
     #Baby paths
-    path('babies/', views.baby_list, name='baby_list'),
-    path('new_baby/', views.new_baby, name='new_baby'),
-    path('baby_detail/<int:baby_id>/', views.baby_detail, name='baby_detail'),
-    path('baby_edit/<int:baby_id>/', views.baby_edit, name='baby_edit'),
-    path('baby_delete/<int:baby_id>/', views.baby_delete, name='baby_delete'),
-
-    #Arrival paths
-    path('arrivals/', views.arrival_list, name='arrival_list'),
-    path('new_arrival/', views.new_arrival, name='new_arrival'),
-    path('arrival_edit/<int:arrival_id>/', views.arrival_edit, name='arrival_edit'),
-    path('arrival_delete/<int:arrival_id>/', views.arrival_delete, name='arrival_delete'),
+    path('view_baby/<int:baby_id>/', views.view_baby, name='view_baby'),
+    path('edit_baby/<int:baby_id>/', views.edit_baby, name='edit_baby'),
+    path('delete_baby/<int:baby_id>/', views.delete_baby, name='delete_baby'),
+    path('add_baby/', views.add_baby, name='add_baby'),
+    path('list_babies/', views.list_babies, name='list_babies'),
 
     #Departure paths
-    path('departures/', views.departure_list, name='departure_list'),
-    path('new_departure/', views.new_departure, name='new_departure'),
-    path('departure_edit/<int:departure_id>/', views.departure_edit, name='departure_edit'),
-    path('departure_delete/<int:departure_id>/', views.departure_delete, name='departure_delete'),
+    path('departures/', views.list_departures, name='list_departures'),
+    path('departures/add/', views.add_departure, name='add_departure'),
+    path('departures/<int:departure_id>/', views.view_departure, name='view_departure'),
+    path('departures/<int:departure_id>/edit/', views.edit_departure, name='edit_departure'),
+    path('departures/<int:departure_id>/delete/', views.delete_departure, name='delete_departure'),
 
-    #ItemSale paths
-    path('itemsale_list/', views.itemsale_list, name='itemsale_list'),
-    path('new_itemsale/', views.new_itemsale, name='new_itemsale'),
-    path('itemsale_edit/<int:itemsale_id>/', views.itemsale_edit, name='itemsale_edit'),
-    path('itemsale_delete/<int:itemsale_id>/', views.itemsale_delete, name='itemsale_delete'),
+    #Doll-type paths
+    path('doll_types/', views.list_doll_types, name='list_doll_types'),
+    path('doll_types/add/', views.add_doll_type, name='add_doll_type'),
+    path('doll_types/<int:doll_type_id>/', views.view_doll_type, name='view_doll_type'),
+    path('doll_types/<int:doll_type_id>/edit/', views.edit_doll_type, name='edit_doll_type'),
+    path('doll_types/<int:doll_type_id>/delete/', views.delete_doll_type, name='delete_doll_type'),
+
+    #Doll paths
+    path('dolls/', views.list_dolls, name='list_dolls'),
+    path('dolls/add/', views.add_doll, name='add_doll'),
+    path('dolls/<int:doll_id>/', views.view_doll, name='view_doll'),
+    path('dolls/<int:doll_id>/edit/', views.edit_doll, name='edit_doll'),
+    path('dolls/<int:doll_id>/delete/', views.delete_doll, name='delete_doll'),
+
+    #Sales paths
+    path('sales/', views.list_sales, name='list_sales'),
+    path('sales/add/', views.add_sales, name='add_sales'),
+    path('sales/<int:sales_id>/', views.view_sales, name='view_sales'),
+    path('sales/<int:sales_id>/edit/', views.edit_sales, name='edit_sales'),
+    path('sales/<int:sales_id>/delete/', views.delete_sales, name='delete_sales'),
+
+    #Babypayment paths
+    path('babypayments/', views.list_babypayments, name='list_babypayments'),
+    path('babypayments/add/', views.add_babypayment, name='add_babypayment'),
+    path('babypayments/<int:babypayment_id>/', views.view_babypayment, name='view_babypayment'),
+    path('babypayments/<int:babypayment_id>/edit/', views.edit_babypayment, name='edit_babypayment'),
+    path('babypayments/<int:babypayment_id>/delete/', views.delete_babypayment, name='delete_babypayment'),
+
+    #Sitterpayment paths
+    path('sitterpayments/', views.list_sitterpayments, name='list_sitterpayments'),
+    path('sitterpayments/add/', views.add_sitterpayment, name='add_sitterpayment'),
+    path('sitterpayments/<int:sitterpayment_id>/', views.view_sitterpayment, name='view_sitterpayment'),
+    path('sitterpayments/<int:sitterpayment_id>/edit/', views.edit_sitterpayment, name='edit_sitterpayment'),
+    path('sitterpayments/<int:sitterpayment_id>/delete/', views.delete_sitterpayment, name='delete_sitterpayment'),
 
     #Item paths
-    path('item_list/', views.item_list, name='item_list'),
-    path('new_item/', views.new_item, name='new_item'),
-    path('item_edit/<int:item_id>/', views.item_edit, name='item_edit'),
-    path('item_delete/<int:item_id>/', views.item_delete, name='item_delete'),
+    path('items/', views.list_items, name='list_items'),
+    path('items/add/', views.add_item, name='add_item'),
+    path('items/<int:item_id>/', views.view_item, name='view_item'),
+    path('items/<int:item_id>/edit/', views.edit_item, name='edit_item'),
+    path('items/<int:item_id>/delete/', views.delete_item, name='delete_item'),
+
+   #Stock paths
+    path('stocks/', views.list_stock, name='list_stock'),
+    path('stocks/add/', views.add_stock, name='add_stock'),
+    path('stocks/<int:pk>/', views.view_stock, name='view_stock'),
+    path('stocks/<int:stock_id>/edit/', views.edit_stock, name='edit_stock'),
+    path('stocks/<int:stock_id>/delete/', views.delete_stock, name='delete_stock'),
+
+    #Issuing paths
+    path('issuing/', views.list_issuing, name='list_issuing'),
+    path('issuing/add/', views.add_issuing, name='add_issuing'),
+    path('issuing/<int:issuing_id>/', views.view_issuing, name='view_issuing'),
+    path('issuing/<int:issuing_id>/edit/', views.edit_issuing, name='edit_issuing'),
+    path('issuing/<int:issuing_id>/delete/', views.delete_issuing, name='delete_issuing'),
+    
+
+]
     
    
     
@@ -62,25 +113,4 @@ urlpatterns = [
     
     
     
-    #path('about/', views.about,name='aboutpage'),
-    # path('contact/', views.contact,name='contactpage'),
-    #path('login/', views.login,name='loginpage'),
-    # path('register/', views.register,name='registerpage'),
-    # path('logout/', views.logout,name='logoutpage'),
-    # Sitter URLs
-    #path('sitters/', views.sitter_list, name='sitter_list'),
-    #path('sitters/<int:sitter_id>/', views.sitter_detail, name='sitter_detail'),
     
-    # Baby URLs
-    #path('babies/', views.baby_list, name='baby_list'),
-    #path('babies/<int:baby_id>/', views.baby_detail, name='baby_detail'),
-    
-    # Attendance URL
-    #path('attendance/', views.attendance_list, name='attendance_list'),
-    
-    # Payment URL
-    #path('payments/', views.payment_list, name='payment_list'),
-    
-    # Procurement URL
-    #path('procurement/', views.procurement_list, name='procurement_list'),
-]

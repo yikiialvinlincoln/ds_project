@@ -2,265 +2,470 @@ from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import SitterForm, BabyForm, ArrivalForm, DepartureForm, ItemSaleForm, ItemForm
-from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from .forms import StaytypeForm, SitterForm, BabyForm, DepartureForm, Doll_typeForm, DollForm, SalesForm, BabypaymentForm, SitterpaymentForm, ItemForm, StockForm, IssuingForm, SitterattendanceForm
+# from django.contrib import messages
+
 
 # Create your views here.
 def index(request):
     return render(request, 'daycare/index.html')
 
+def home(request):
+    #Data Analysis
+    count_babies = Baby.objects.count()
+    count_sitters = Sitter.objects.count()
+    count_departure = Departure.objects.count()
+    count_sitterattendance = Sitterattendance.objects.count()
+    context = {
+        "count_babies": count_babies,
+        "count_sitters": count_sitters,
+        "count_departure": count_departure,
+        "count_sitterattendance": count_sitterattendance,
+    }
+    return render(request, 'daycare/home.html', context)
+       
 
-def sitter_list(request):
+def list_sitters(request):
     sitters = Sitter.objects.all()
     return render(request, 'daycare/sitter_list.html', {'sitters': sitters})
 
-def sitter_details(request, sitter_id):
-    sitter = Sitter.objects.get(pk=sitter_id)
-    return render(request, 'daycare/sitter_details.html', {'sitter': sitter})   
-
-def new_sitter(request):
+def add_sitter(request):
     if request.method == 'POST':
         form = SitterForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Sitter added successfully!')
-            return redirect('sitter_list')
+            return redirect('list_sitters')
     else:
         form = SitterForm()
-    
-    return render(request, 'daycare/new_sitter.html', {'form': form})     
+    return render(request, 'daycare/sitter_form.html', {'form': form})
 
-def sitter_edit(request, sitter_id):
+def view_sitter(request, sitter_id):
+    sitter = get_object_or_404(Sitter, pk=sitter_id)
+    return render(request, 'daycare/sitter_detail.html', {'sitter': sitter})
+
+def edit_sitter(request, sitter_id):
     sitter = get_object_or_404(Sitter, pk=sitter_id)
     if request.method == 'POST':
         form = SitterForm(request.POST, instance=sitter)
         if form.is_valid():
             form.save()
-            return redirect('sitter_details', sitter_id=sitter_id)
+            return redirect('list_sitters')
     else:
         form = SitterForm(instance=sitter)
-    return render(request, 'daycare/sitter_edit.html', {'form': form})
+    return render(request, 'daycare/sitter_form.html', {'form': form})
 
-def sitter_delete(request, sitter_id):
+def delete_sitter(request, sitter_id):
     sitter = get_object_or_404(Sitter, pk=sitter_id)
     if request.method == 'POST':
-        sitter.delete()
-        return redirect('sitter_list')
-    return render(request, 'daycare/sitter_delete.html', {'sitter': sitter})    
+        if 'delete' in request.POST:
+            sitter.delete()
+            return redirect('list_sitters')
+        elif 'cancel' in request.POST:
+            return redirect('list_sitters')
+    return render(request, 'daycare/delete_sitter.html', {'sitter': sitter})
 
 
-def baby_list(request):
+def list_sitter_attendance(request):
+    sitter_attendance = Sitterattendance.objects.all()
+    return render(request, 'daycare/sitterattendance_list.html', {'sitter_attendance': sitter_attendance})
+
+def add_sitter_attendance(request):
+    if request.method == 'POST':
+        form = SitterattendanceForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('list_sitter_attendance')
+    else:
+        form = SitterattendanceForm()
+    return render(request, 'daycare/sitterattendance_form.html', {'form': form})
+
+def edit_sitter_attendance(request, attendance_id):
+    attendance = get_object_or_404(Sitterattendance, pk=attendance_id)
+    if request.method == 'POST':
+        form = SitterAttendanceForm(request.POST, instance=attendance)
+        if form.is_valid():
+            form.save()
+            return redirect('list_sitter_attendance')
+    else:
+        form = SitterAttendanceForm(instance=attendance)
+    return render(request, 'daycare/sitterattendance_form.html', {'form': form})
+
+def delete_sitter_attendance(request, attendance_id):
+    attendance = get_object_or_404(Sitterattendance, pk=attendance_id)
+    if request.method == 'POST':
+        attendance.delete()
+        return redirect('list_sitter_attendance')
+    return render(request, 'daycare/sitterattendance_confirm_delete.html', {'attendance': attendance})
+
+
+def list_babies(request):
     babies = Baby.objects.all()
-    return render(request, 'daycare/baby_list.html', {'babies': babies}) 
+    return render(request, 'daycare/baby_list.html', {'babies': babies})
 
-def new_baby(request):
+def add_baby(request):
     if request.method == 'POST':
         form = BabyForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Baby added successfully!')
-            return redirect('baby_list')  
+            return redirect('list_babies')
     else:
         form = BabyForm()
-    
-    return render(request, 'daycare/new_baby.html', {'form': form})
+    return render(request, 'daycare/baby_form.html', {'form': form})
 
-
-def baby_detail(request, baby_id):
+def view_baby(request, baby_id):
     baby = get_object_or_404(Baby, pk=baby_id)
-    return render(request, 'daycare/baby_detail.html', {'baby': baby})    
+    return render(request, 'daycare/baby_detail.html', {'baby': baby})
 
-
-def baby_edit(request, baby_id):
-    baby = get_object_or_404(Baby, pk=baby_id)
+def edit_baby(request, baby_id):
+    baby = Baby.objects.get(pk=baby_id)
     if request.method == 'POST':
         form = BabyForm(request.POST, instance=baby)
         if form.is_valid():
             form.save()
-            return redirect('baby_detail', baby_id=baby_id)
+            return redirect('list_babies')
     else:
         form = BabyForm(instance=baby)
-    
-    return render(request, 'daycare/baby_edit.html', {'form': form, 'baby': baby})
+    return render(request, 'daycare/baby_form.html', {'form': form})
 
-
-def baby_delete(request, baby_id):
-    baby = get_object_or_404(Baby, pk=baby_id)
+def delete_baby(request, baby_id):
+    baby = Baby.objects.get(pk=baby_id)
     if request.method == 'POST':
         baby.delete()
-        return redirect('baby_list')  
-    
-    return render(request, 'daycare/baby_delete.html', {'baby': baby})
+        return redirect('list_babies')
+    return render(request, 'daycare/baby_confirm_delete.html', {'baby': baby})
 
 
-def arrival_list(request):
-    arrivals = Arrival.objects.all()
-    return render(request, 'daycare/arrival_list.html', {'arrivals': arrivals})
-
-
-def new_arrival(request):
-    if request.method == 'POST':
-        form = ArrivalForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('arrival_list')
-    else:
-        form = ArrivalForm()
-    
-    return render(request, 'daycare/new_arrival.html', {'form': form})    
-
-
-def arrival_edit(request, arrival_id):
-    arrival = get_object_or_404(Arrival, pk=arrival_id)
-    if request.method == 'POST':
-        form = ArrivalForm(request.POST, instance=arrival)
-        if form.is_valid():
-            form.save()
-            return redirect('arrival_list')
-    else:
-        form = ArrivalForm(instance=arrival)
-    
-    return render(request, 'daycare/arrival_edit.html', {'form': form, 'arrival': arrival})   
-
-
-def arrival_delete(request, arrival_id):
-    arrival = get_object_or_404(Arrival, pk=arrival_id)
-    if request.method == 'POST':
-        arrival.delete()
-        return redirect('arrival_list')
-    
-    return render(request, 'daycare/arrival_delete.html', {'arrival': arrival})     
-
-
-def departure_list(request):
+def list_departures(request):
     departures = Departure.objects.all()
-    return render(request, 'daycare/departure_list.html', {'departures': departures})  
+    return render(request, 'daycare/departure_list.html', {'departures': departures})
 
-
-def new_departure(request):
+def add_departure(request):
     if request.method == 'POST':
         form = DepartureForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('departure_list')
+            return redirect('list_departures')
     else:
         form = DepartureForm()
-    
-    return render(request, 'daycare/new_departure.html', {'form': form})
+    return render(request, 'daycare/departure_form.html', {'form': form})
 
+def view_departure(request, departure_id):
+    departure = get_object_or_404(Departure, pk=departure_id)
+    return render(request, 'daycare/departure_detail.html', {'departure': departure})
 
-def departure_edit(request, departure_id):
+def edit_departure(request, departure_id):
     departure = get_object_or_404(Departure, pk=departure_id)
     if request.method == 'POST':
         form = DepartureForm(request.POST, instance=departure)
         if form.is_valid():
             form.save()
-            return redirect('departure_list')
+            return redirect('list_departures')
     else:
         form = DepartureForm(instance=departure)
-    
-    return render(request, 'daycare/departure_edit.html', {'form': form, 'departure': departure})
+    return render(request, 'daycare/departure_form.html', {'form': form})
 
-def departure_delete(request, departure_id):
+def delete_departure(request, departure_id):
     departure = get_object_or_404(Departure, pk=departure_id)
     if request.method == 'POST':
         departure.delete()
-        return redirect('departure_list')
-    
-    return render(request, 'daycare/departure_delete.html', {'departure': departure})    
+        return redirect('list_departures')
+    return render(request, 'daycare/departure_confirm_delete.html', {'departure': departure})
 
+def list_doll_types(request):
+    doll_types = Doll_type.objects.all()
+    return render(request, 'daycare/doll_type_list.html', {'doll_types': doll_types})
 
-def itemsale_list(request):
-    itemsales = ItemSale.objects.all()
-    return render(request, 'daycare/itemsale_list.html', {'itemsales': itemsales})   
-
-def new_itemsale(request):
+def add_doll_type(request):
     if request.method == 'POST':
-        form = ItemSaleForm(request.POST)
+        form = Doll_typeForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('itemsale_list')
+            return redirect('list_doll_types')
     else:
-        form = ItemSaleForm()
-    
-    return render(request, 'daycare/new_itemsale.html', {'form': form})   
+        form = Doll_typeForm()
+    return render(request, 'daycare/doll_type_form.html', {'form': form})
 
+def view_doll_type(request, doll_type_id):
+    doll_type = get_object_or_404(Doll_type, pk=doll_type_id)
+    return render(request, 'daycare/doll_type_detail.html', {'doll_type': doll_type})
 
-def itemsale_edit(request, itemsale_id):
-    itemsale = get_object_or_404(ItemSale, pk=itemsale_id)
+def edit_doll_type(request, doll_type_id):
+    doll_type = get_object_or_404(Doll_type, pk=doll_type_id)
     if request.method == 'POST':
-        form = ItemSaleForm(request.POST, instance=itemsale)
+        form = Doll_typeForm(request.POST, instance=doll_type)
         if form.is_valid():
             form.save()
-            return redirect('itemsale_list')
+            return redirect('list_doll_types')
     else:
-        form = ItemSaleForm(instance=itemsale)
-    
-    return render(request, 'daycare/itemsale_edit.html', {'form': form, 'itemsale': itemsale})
+        form = Doll_typeForm(instance=doll_type)
+    return render(request, 'daycare/doll_type_form.html', {'form': form})
 
-def itemsale_delete(request, itemsale_id):
-    itemsale = get_object_or_404(ItemSale, pk=itemsale_id)
+def delete_doll_type(request, doll_type_id):
+    doll_type = get_object_or_404(Doll_type, pk=doll_type_id)
     if request.method == 'POST':
-        itemsale.delete()
-        return redirect('itemsale_list')
-    
-    return render(request, 'daycare/itemsale_delete.html', {'itemsale': itemsale})      
+        doll_type.delete()
+        return redirect('list_doll_types')
+    return render(request, 'daycare/doll_type_confirm_delete.html', {'doll_type': doll_type})
 
 
-def item_list(request):
+def list_dolls(request):
+    dolls = Doll.objects.all()
+    return render(request, 'daycare/doll_list.html', {'dolls': dolls})
+
+def add_doll(request):
+    if request.method == 'POST':
+        form = DollForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('list_dolls')
+    else:
+        form = DollForm()
+    return render(request, 'daycare/doll_form.html', {'form': form})
+
+def view_doll(request, doll_id):
+    doll = get_object_or_404(Doll, pk=doll_id)
+    return render(request, 'daycare/doll_detail.html', {'doll': doll})
+
+def edit_doll(request, doll_id):
+    doll = get_object_or_404(Doll, pk=doll_id)
+    if request.method == 'POST':
+        form = DollForm(request.POST, instance=doll)
+        if form.is_valid():
+            form.save()
+            return redirect('list_dolls')
+    else:
+        form = DollForm(instance=doll)
+    return render(request, 'daycare/doll_form.html', {'form': form})
+
+def delete_doll(request, doll_id):
+    doll = get_object_or_404(Doll, pk=doll_id)
+    if request.method == 'POST':
+        doll.delete()
+        return redirect('list_dolls')
+    return render(request, 'daycare/doll_confirm_delete.html', {'doll': doll})
+
+
+def list_sales(request):
+    sales = Sales.objects.all()
+    return render(request, 'daycare/sales_list.html', {'sales': sales})
+
+def add_sales(request):
+    if request.method == 'POST':
+        form = SalesForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('list_sales')
+    else:
+        form = SalesForm()
+    return render(request, 'daycare/sales_form.html', {'form': form})
+
+def view_sales(request, sales_id):
+    sales = get_object_or_404(Sales, pk=sales_id)
+    return render(request, 'daycare/sales_detail.html', {'sales': sales})
+
+def edit_sales(request, sales_id):
+    sales = get_object_or_404(Sales, pk=sales_id)
+    if request.method == 'POST':
+        form = SalesForm(request.POST, instance=sales)
+        if form.is_valid():
+            form.save()
+            return redirect('list_sales')
+    else:
+        form = SalesForm(instance=sales)
+    return render(request, 'daycare/sales_form.html', {'form': form})
+
+def delete_sales(request, sales_id):
+    sales = get_object_or_404(Sales, pk=sales_id)
+    if request.method == 'POST':
+        sales.delete()
+        return redirect('list_sales')
+    return render(request, 'daycare/sales_confirm_delete.html', {'sales': sales})
+
+def list_babypayments(request):
+    babypayments = Babypayment.objects.all()
+    return render(request, 'daycare/babypayment_list.html', {'babypayments': babypayments})
+
+def add_babypayment(request):
+    if request.method == 'POST':
+        form = BabypaymentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('list_babypayments')
+    else:
+        form = BabypaymentForm()
+    return render(request, 'daycare/babypayment_form.html', {'form': form})
+
+def view_babypayment(request, babypayment_id):
+    babypayment = get_object_or_404(Babypayment, pk=babypayment_id)
+    return render(request, 'daycare/babypayment_detail.html', {'babypayment': babypayment})
+
+def edit_babypayment(request, babypayment_id):
+    babypayment = get_object_or_404(Babypayment, pk=babypayment_id)
+    if request.method == 'POST':
+        form = BabypaymentForm(request.POST, instance=babypayment)
+        if form.is_valid():
+            form.save()
+            return redirect('list_babypayments')
+    else:
+        form = BabypaymentForm(instance=babypayment)
+    return render(request, 'daycare/babypayment_form.html', {'form': form})
+
+def delete_babypayment(request, babypayment_id):
+    babypayment = get_object_or_404(Babypayment, pk=babypayment_id)
+    if request.method == 'POST':
+        babypayment.delete()
+        return redirect('list_babypayments')
+    return render(request, 'daycare/babypayment_confirm_delete.html', {'babypayment': babypayment})    
+
+
+def list_sitterpayments(request):
+    sitterpayments = Sitterpayment.objects.all()
+    return render(request, 'daycare/sitterpayment_list.html', {'sitterpayments': sitterpayments})
+
+def add_sitterpayment(request):
+    if request.method == 'POST':
+        form = SitterpaymentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('list_sitterpayments')
+    else:
+        form = SitterpaymentForm()
+    return render(request, 'daycare/sitterpayment_form.html', {'form': form})
+
+def view_sitterpayment(request, sitterpayment_id):
+    sitterpayment = get_object_or_404(Sitterpayment, pk=sitterpayment_id)
+    return render(request, 'daycare/sitterpayment_detail.html', {'sitterpayment': sitterpayment})
+
+def edit_sitterpayment(request, sitterpayment_id):
+    sitterpayment = get_object_or_404(Sitterpayment, pk=sitterpayment_id)
+    if request.method == 'POST':
+        form = SitterpaymentForm(request.POST, instance=sitterpayment)
+        if form.is_valid():
+            form.save()
+            return redirect('list_sitterpayments')
+    else:
+        form = SitterpaymentForm(instance=sitterpayment)
+    return render(request, 'daycare/sitterpayment_form.html', {'form': form})
+
+def delete_sitterpayment(request, sitterpayment_id):
+    sitterpayment = get_object_or_404(Sitterpayment, pk=sitterpayment_id)
+    if request.method == 'POST':
+        sitterpayment.delete()
+        return redirect('list_sitterpayments')
+    return render(request, 'daycare/sitterpayment_confirm_delete.html', {'sitterpayment': sitterpayment})
+
+def list_items(request):
     items = Item.objects.all()
     return render(request, 'daycare/item_list.html', {'items': items})
 
-def new_item(request):
+def add_item(request):
     if request.method == 'POST':
         form = ItemForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('item_list')
+            return redirect('list_items')
     else:
         form = ItemForm()
-    
-    return render(request, 'daycare/new_item.html', {'form': form})
+    return render(request, 'daycare/item_form.html', {'form': form})
 
+def view_item(request, item_id):
+    item = get_object_or_404(Item, pk=item_id)
+    return render(request, 'daycare/item_detail.html', {'item': item})
 
-def item_edit(request, item_id):
+def edit_item(request, item_id):
     item = get_object_or_404(Item, pk=item_id)
     if request.method == 'POST':
         form = ItemForm(request.POST, instance=item)
         if form.is_valid():
             form.save()
-            return redirect('item_list')
+            return redirect('list_items')
     else:
         form = ItemForm(instance=item)
-    
-    return render(request, 'daycare/item_edit.html', {'form': form, 'item': item})
+    return render(request, 'daycare/item_form.html', {'form': form})
 
-def item_delete(request, item_id):
+def delete_item(request, item_id):
     item = get_object_or_404(Item, pk=item_id)
     if request.method == 'POST':
         item.delete()
-        return redirect('item_list')
-    
-    return render(request, 'daycare/item_delete.html', {'item': item})    
+        return redirect('list_items')
+    return render(request, 'daycare/item_confirm_delete.html', {'item': item})    
+
+def list_stock(request):
+    stocks = Stock.objects.all()
+    return render(request, 'daycare/stock_list.html', {'stocks': stocks})
+
+def add_stock(request):
+    if request.method == 'POST':
+        form = StockForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('list_stock')
+    else:
+        form = StockForm()
+    return render(request, 'daycare/stock_form.html', {'form': form})
+
+def view_stock(request, pk):
+    stock = get_object_or_404(Stock, pk=pk)
+    return render(request, 'daycare/stock_detail.html', {'stock': stock})
 
 
-# def custom_login(request):
-#     if request.method == 'POST':
-#         form = CustomLoginForm(request.POST)
-#         if form.is_valid():
-#             username = form.cleaned_data['username']
-#             password = form.cleaned_data['password']
-#             user = authenticate(request, username=username, password=password)
-#             if user is not None:
-#                 login(request, user)
-#                 return redirect('home')  # Redirect to the home page after login
-#             else:
-#                 form.add_error(None, 'Invalid username or password')
-#     else:
-#         form = CustomLoginForm()
-    
-#     return render(request, 'daycare/login.html', {'form': form})    
+def edit_stock(request, stock_id):
+    stock = get_object_or_404(Stock, pk=stock_id)
+    if request.method == 'POST':
+        form = StockForm(request.POST, instance=stock)
+        if form.is_valid():
+            form.save()
+            return redirect('list_stock')
+    else:
+        form = StockForm(instance=stock)
+    return render(request, 'daycare/stock_form.html', {'form': form})
+
+def delete_stock(request, stock_id):
+    stock = get_object_or_404(Stock, pk=stock_id)
+    if request.method == 'POST':
+        stock.delete()
+        return redirect('list_stock')
+    return render(request, 'daycare/stock_confirm_delete.html', {'stock': stock})    
+
+def list_issuing(request):
+    issuings = Issuing.objects.all()
+    return render(request, 'daycare/issuing_list.html', {'issuings': issuings})
+
+def add_issuing(request):
+    if request.method == 'POST':
+        form = IssuingForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('list_issuing')
+    else:
+        form = IssuingForm()
+    return render(request, 'daycare/issuing_form.html', {'form': form})
+
+def view_issuing(request, issuing_id):
+    issuing = get_object_or_404(Issuing, pk=issuing_id)
+    return render(request, 'daycare/issuing_detail.html', {'issuing': issuing})
+
+def edit_issuing(request, issuing_id):
+    issuing = get_object_or_404(Issuing, pk=issuing_id)
+    if request.method == 'POST':
+        form = IssuingForm(request.POST, instance=issuing)
+        if form.is_valid():
+            form.save()
+            return redirect('list_issuing')
+    else:
+        form = IssuingForm(instance=issuing)
+    return render(request, 'daycare/issuing_form.html', {'form': form})
+
+def delete_issuing(request, issuing_id):
+    issuing = get_object_or_404(Issuing, pk=issuing_id)
+    if request.method == 'POST':
+        issuing.delete()
+        return redirect('list_issuing')
+    return render(request, 'daycare/issuing_confirm_delete.html', {'issuing': issuing})
+ 
+
+
+ 
 
 
 

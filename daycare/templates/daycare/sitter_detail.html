@@ -1,0 +1,72 @@
+{% extends 'daycare/base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitter Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container fluid">
+    <h1>Sitter Details</h1>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <table class="table table-bordered">
+                <tr>
+                    <th>Name</th>
+                    <td>{{ sitter.s_name }}</td>
+                </tr>
+                <tr>
+                    <th>Location</th>
+                    <td>{{ sitter.location }}</td>
+                </tr>
+                <tr>
+                    <th>Date of Birth</th>
+                    <td>{{ sitter.date_of_birth }}</td>
+                </tr>
+                <tr>
+                    <th>Gender</th>
+                    <td>{{ sitter.gender }}</td>
+                </tr>
+                <tr>
+                    <th>Next of Kin</th>
+                    <td>{{ sitter.next_of_kin }}</td>
+                </tr>
+                <tr>
+                    <th>NIN</th>
+                    <td>{{ sitter.nin }}</td>
+                </tr>
+                <tr>
+                    <th>Recommender Name</th>
+                    <td>{{ sitter.recommender_name }}</td>
+                </tr>
+                <tr>
+                    <th>Religion</th>
+                    <td>{{ sitter.religion }}</td>
+                </tr>
+                <tr>
+                    <th>Education Level</th>
+                    <td>{{ sitter.education_level }}</td>
+                </tr>
+                <tr>
+                    <th>Sitter Number</th>
+                    <td>{{ sitter.sitter_number }}</td>
+                </tr>
+                <tr>
+                    <th>Contact</th>
+                    <td>{{ sitter.contact }}</td>
+                </tr>
+            </table>
+            <a href="{% url 'edit_sitter' sitter.id %}" class="btn btn-primary">Edit</a>
+            <a href="{% url 'delete_sitter' sitter.id %}" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+

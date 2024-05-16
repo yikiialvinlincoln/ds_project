@@ -1,0 +1,15 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Issuing List</title>
+</head>
+<body>
+    <h1>Issuing List</h1>
+    <ul>
+        {% for issuing in issuings %}
+        <li><a href="{% url 'view_issuing' issuing.id %}">{{ issuing.quantity_issued_out }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

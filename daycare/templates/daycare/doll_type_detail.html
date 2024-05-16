@@ -1,0 +1,17 @@
+{% extends 'daycare/base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doll Type Details</title>
+</head>
+<body>
+    <h1>Doll Type Details</h1>
+    <p>Name: {{ doll_type.name }}</p>
+    <a href="{% url 'edit_doll_type' doll_type.id %}">Edit</a>
+    <a href="{% url 'delete_doll_type' doll_type.id %}">Delete</a>
+</body>
+</html>
+
+{% endblock %}

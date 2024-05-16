@@ -1,0 +1,19 @@
+{% extends 'daycare/base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sitter Payments</title>
+</head>
+<body>
+    <h1>Sitter Payments</h1>
+    <ul>
+        {% for sitterpayment in sitterpayments %}
+            <li>{{ sitterpayment.s_name }} - {{ sitterpayment.date }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_sitterpayment' %}">Add Payment</a>
+</body>
+</html>
+{% endblock %}

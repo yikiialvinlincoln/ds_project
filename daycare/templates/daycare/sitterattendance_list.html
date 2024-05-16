@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sitter Attendance List</title>
+</head>
+<body>
+    <h1>Sitter Attendance List</h1>
+    <ul>
+        {% for attendance in sitter_attendance %}
+            <li>{{ attendance.s_name }} - {{ attendance.date }} - {{ attendance.status }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_sitter_attendance' %}">Add Attendance</a>
+</body>
+</html>

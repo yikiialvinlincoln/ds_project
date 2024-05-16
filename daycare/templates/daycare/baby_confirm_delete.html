@@ -1,0 +1,20 @@
+{% extends 'daycare/base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirm Delete</title>
+</head>
+<body>
+    <h1>Confirm Delete</h1>
+    <p>Are you sure you want to delete {{ baby.b_name }}?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" name="delete">Delete</button>
+        <button type="submit" name="cancel">Cancel</button>
+    </form>
+</body>
+</html>
+
+{% endblock %}

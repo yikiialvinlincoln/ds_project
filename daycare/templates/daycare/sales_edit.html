@@ -1,0 +1,16 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Sale</title>
+</head>
+<body>
+    <h1>Edit Sale</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Changes</button>
+        <a href="{% url 'list_sales' %}">Cancel</a>
+    </form>
+</body>
+</html>

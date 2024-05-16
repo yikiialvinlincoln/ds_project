@@ -1,55 +1,96 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Landing Page</title>
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-        background: #f0f0f0;
-        overflow: hidden;
-    }
-    .container {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-        width: 100%;
-        padding: 0 20px;
-    }
-    .bg-image {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        z-index: -1;
-    }
-    .login-button {
-        background-color: #4CAF50;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        cursor: pointer;
-        font-size: 16px;
-        border-radius: 5px;
-        text-decoration: none;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Daycare Admin</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('https://images.fosterwebmarketing.com/917/How%20to%20pick%20the%20right%20daycare.png');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .welcome-text {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .login-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .logo {
+            width: 100px; /* Adjust the width as needed */
+            height: auto;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to Daystar Daycare App</h1>
-        <a href="" class="login-button" >Login here</a>
-        {% comment %} <a href="{% url "sitter_list" %}" class="login-button" >Sitters</a> {% endcomment %}
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD1TvgBLY15y7cvgz36puX4w_huZL52bZ4uxUz4EhOGQ&s" alt="Logo" class="logo">
+    <div class="welcome-text">
+        <h1>Welcome to Daystar Daycare Admin</h1>
+        <p>Manage your daycare center with ease at the click of a button.</p>
+        {% comment %} <a href="{% url 'login' %}" class="login-button">Login here</a> {% endcomment %}
     </div>
-    {% comment %} <img src="https://gpisu.com/wp-content/uploads/2023/11/preschool-children-scaled.jpg" alt="Background Image" class="bg-image"> {% endcomment %}
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

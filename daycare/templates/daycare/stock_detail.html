@@ -1,0 +1,20 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Details</title>
+</head>
+<body>
+    <h1>Stock Details</h1>
+    <p>Item Name: {{ stock.item_name }}</p>
+    <p>Purchased On: {{ stock.purchased_on }}</p>
+    <p>Quantity Bought: {{ stock.quantity_bought }}</p>
+    <p>Amount in UGX: {{ stock.amount_UGX }}</p>
+    <p>Quantity Issued Out: {{ stock.quantity_issued_out }}</p>
+    <p>Quantity in Stock: {{ stock.quantity_in_stock }}</p>
+    <p>Available Stock: {{ stock.available_stock }}</p>
+    
+    <a href="{% url 'edit_stock' stock.id %}">Edit</a>
+    <a href="{% url 'delete_stock' stock.id %}">Delete</a>
+</body>
+</html>

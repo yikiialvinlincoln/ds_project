@@ -1,0 +1,12 @@
+{% extends 'daycare/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Add Sitter Attendance</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary mt-2">Submit</button>
+    </form>
+</div>
+{% endblock %}

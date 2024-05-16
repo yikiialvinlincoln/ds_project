@@ -1,0 +1,20 @@
+{% extends 'daycare/base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Doll Type</title>
+</head>
+<body>
+    <h1>Edit Doll Type</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Changes</button>
+        <a href="{% url 'list_doll_types' %}">Cancel</a>
+    </form>
+</body>
+</html>
+
+{% endblock %}

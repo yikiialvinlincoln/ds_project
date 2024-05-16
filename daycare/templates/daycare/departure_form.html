@@ -1,0 +1,21 @@
+{% extends 'daycare/base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Departure</title>
+</head>
+<body>
+    <h1>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Departure</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+    <a href="{% url 'list_departures' %}">Back to List</a>
+</body>
+</html>
+
+{% endblock content %}
+

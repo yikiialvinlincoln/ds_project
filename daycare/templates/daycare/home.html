@@ -1,0 +1,24 @@
+{% extends 'daycare/base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+    <h1><b>Welcome to the Home Page</b></h1>
+    <p><i class="fas fa-baby"></i> Number of Babies: {{ count_babies }}</p>
+    <p><i class="fas fa-user"></i> Number of Sitters: {{ count_sitters }}</p>
+    <p><i class="fas fa-baby-carriage"></i> Number of Departures: {{ count_departure }}</p>
+    <p><i class="fas fa-calendar-check"></i> Number of Sitter Attendances: {{ count_sitterattendance }}</p>
+</body>
+</html>
+
+{% endblock %}
+
+
+
+
