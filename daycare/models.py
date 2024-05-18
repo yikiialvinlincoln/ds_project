@@ -36,24 +36,25 @@ class Sitterattendance(models.Model):
             
 
 class Baby(models.Model):
-    GENDER = {
+    GENDER_CHOICES = [
         ('M', 'Male'),
         ('F', 'Female')
-    }
+    ]
     b_name = models.CharField(max_length=20)
-    gender = models.CharField(max_length=10, choices=GENDER)
-    age = models.CharField(max_length=10)
-    location = models.CharField(max_length=15, default='')
-    parents_names = models.CharField(max_length=15)
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
+    age = models.IntegerField()
+    location = models.CharField(max_length=50, default='')
+    parents_names = models.CharField(max_length=50)
     fee_in_SHS = models.IntegerField()
     assigned_to = models.ForeignKey(Sitterattendance, on_delete=models.CASCADE)
     period_of_stay = models.ForeignKey(Staytype, on_delete=models.CASCADE)
     brought_by = models.CharField(max_length=200)
-    baby_number = models.CharField(max_length=200, unique=True,blank=False, null=True)
-    time_in = models.DateTimeField()
+    baby_number = models.CharField(max_length=200, unique=True, blank=False, null=True)
+    time_in = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.b_name
+
 
 
 class Departure(models.Model):
@@ -88,48 +89,56 @@ class Doll(models.Model):
         return self.doll_name      
 
 class Sales(models.Model):
-    doll = models.ForeignKey(Doll, on_delete=models.CASCADE,null=False, blank=False)
-    b_name = models.ForeignKey(Baby, on_delete=models.CASCADE)
-    paid_by = models.CharField(max_length=200,null= True)
+    doll = models.ForeignKey('Doll', on_delete=models.CASCADE, null=False, blank=False)
+    b_name = models.ForeignKey('Baby', on_delete=models.CASCADE)
+    paid_by = models.CharField(max_length=200, null=True)
     quantity_sold = models.IntegerField(default=0)
     received_amount = models.IntegerField(default=0)
     date_sold = models.DateField(default=timezone.now)
     unit_price = models.IntegerField(default=0)
     
+    def __str__(self):
+        return f"Sale of {self.doll} to {self.b_name} on {self.date_sold}"
+    
+    @property
     def comp_total(self):
-        total = self.quantity_sold * self.unit_price
-        return int(total)
+        return self.quantity_sold * self.unit_price
 
+    @property
     def comp_balance(self):
-        balance = self.comp_total - self.received_amount()
-        return int(balance)    
+        return self.comp_total - self.received_amount
 
 class Babypayment(models.Model):
     b_name = models.CharField(max_length=200)
-    paid_on = models.DateField()
-    full_day = models.BooleanField(default=False,blank=True)       
-    half_day = models.BooleanField(default=False,blank=True)       
-    monthly_h = models.BooleanField(default=False,blank=True)       
-    monthly_f = models.BooleanField(default=False,blank=True)    
-    amount_due = models.DecimalField(max_digits=15,decimal_places=2,blank=True)
-    paid_amount = models.DecimalField(max_digits=15,decimal_places=2) 
-    balance_left = models.DecimalField(max_digits=15,decimal_places=2,default=0, blank=True)
+    paid_on = models.DateField(default=timezone.now)
+    full_day = models.BooleanField(default=False, blank=True)       
+    half_day = models.BooleanField(default=False, blank=True)       
+    amount_due = models.DecimalField(max_digits=15, decimal_places=1, blank=True)
+    paid_amount = models.DecimalField(max_digits=15, decimal_places=1) 
+    balance_left = models.DecimalField(max_digits=15, decimal_places=1, default=0, blank=True)
 
     def __str__(self):
         return self.b_name
 
+    def save(self, *args, **kwargs):
+        # Calculate the balance left before saving the instance
+        if self.amount_due and self.paid_amount:
+            self.balance_left = self.amount_due - self.paid_amount
+        super().save(*args, **kwargs)
+
 class Sitterpayment(models.Model):
-    s_name = models.ForeignKey(Sitterattendance, on_delete=models.CASCADE)
+    s_name = models.ForeignKey('Sitterattendance', on_delete=models.CASCADE)
     date = models.DateField(default=timezone.now)
     baby_count = models.IntegerField(default=0)
     amount = models.IntegerField(default=3000)
+    total_amount = models.IntegerField(default=0)  # This will store the computed total amount
 
     def __str__(self):
         return f"Sitter payment - {self.s_name}"
 
-    def total_amount(self):
-        total = self.amount * self.baby_count
-        return int(total)             
+    def save(self, *args, **kwargs):
+        self.total_amount = self.amount * self.baby_count
+        super().save(*args, **kwargs)       
 
 class Item(models.Model):
     name = models.CharField(max_length=50,null=True,blank=True) 
@@ -137,20 +146,19 @@ class Item(models.Model):
         return self.name    
 
 class Stock(models.Model):
-    item_name = models.ForeignKey(Item, on_delete=models.CASCADE,null=True,blank=True) 
+    item_name = models.ForeignKey('Item', on_delete=models.CASCADE, null=True, blank=True) 
     purchased_on = models.DateField(default=timezone.now)
-    quantity_bought = models.IntegerField(default='')    
-    amount_UGX = models.IntegerField(default='')
-    quantity_issued_out = models.IntegerField(default='')   
-    quantity_in_stock = models.IntegerField(default='')   
-    #available_stock = models.IntegerField(default=0)   
-
+    quantity_bought = models.IntegerField(default=0)    
+    amount_UGX = models.IntegerField(default=0)
+    quantity_issued_out = models.IntegerField(default=0)   
+    quantity_in_stock = models.IntegerField(default=0)   
+    
     def __str__(self):
         return str(self.item_name)
 
-    #def available_stock(self):
-        quantitytotal = self.available_stock + self.quantity_bought
-        return int(quantitytotal)
+    @property
+    def available_stock(self):
+        return self.quantity_bought - self.quantity_issued_out
 
 class Issuing(models.Model):
     quantity_issued_out = models.IntegerField(default=0)            

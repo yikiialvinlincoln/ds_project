@@ -1,0 +1,55 @@
+{% extends 'daycare/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4" style="text-align: center;"><b>ADD BABY PAYMENT</b></h2>
+    <form method="post" class="needs-validation" novalidate>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <div class="form-group">
+            <label for="{{ form.b_name.id_for_label }}">{{ form.b_name.label }}</label>
+            {{ form.b_name }}
+            {{ form.b_name.errors }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.paid_on.id_for_label }}">{{ form.paid_on.label }}</label>
+            {{ form.paid_on }}
+            {{ form.paid_on.errors }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.full_day.id_for_label }}">{{ form.full_day.label }}</label>
+            {{ form.full_day }}
+            {{ form.full_day.errors }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.half_day.id_for_label }}">{{ form.half_day.label }}</label>
+            {{ form.half_day }}
+            {{ form.half_day.errors }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.amount_due.id_for_label }}">{{ form.amount_due.label }}</label>
+            {{ form.amount_due }}
+            {{ form.amount_due.errors }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.paid_amount.id_for_label }}">{{ form.paid_amount.label }}</label>
+            {{ form.paid_amount }}
+            {{ form.paid_amount.errors }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.balance_left.id_for_label }}">{{ form.balance_left.label }}</label>
+            {{ form.balance_left }}
+            {{ form.balance_left.errors }}
+        </div>
+
+        <button type="submit" class="btn btn-secondary mt-2">Submit</button>
+    </form>
+</div>
+{% endblock %}

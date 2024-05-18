@@ -115,73 +115,7 @@ class SitterattendanceForm(forms.ModelForm):
 class BabyForm(forms.ModelForm):
     class Meta:
         model = Baby
-        fields = ['b_name', 'gender', 'age', 'location', 'parents_names', 'fee_in_SHS', 'assigned_to', 'period_of_stay', 'brought_by', 'baby_number', 'time_in']
-
-    def clean_b_name(self):
-        b_name = self.cleaned_data.get('b_name')
-        if not b_name:
-            raise forms.ValidationError('This field is required.')
-        return b_name
-
-    def clean_gender(self):
-        gender = self.cleaned_data.get('gender')
-        if not gender:
-            raise forms.ValidationError('This field is required.')
-        return gender
-
-    def clean_age(self):
-        age = self.cleaned_data.get('age')
-        if not age:
-            raise forms.ValidationError('This field is required.')
-        return age
-
-    def clean_location(self):
-        location = self.cleaned_data.get('location')
-        if not location:
-            raise forms.ValidationError('This field is required.')
-        return location
-
-    def clean_parents_names(self):
-        parents_names = self.cleaned_data.get('parents_names')
-        if not parents_names:
-            raise forms.ValidationError('This field is required.')
-        return parents_names
-
-    def clean_fee_in_SHS(self):
-        fee_in_SHS = self.cleaned_data.get('fee_in_SHS')
-        if not fee_in_SHS:
-            raise forms.ValidationError('This field is required.')
-        return fee_in_SHS
-
-    def clean_assigned_to(self):
-        assigned_to = self.cleaned_data.get('assigned_to')
-        if not assigned_to:
-            raise forms.ValidationError('This field is required.')
-        return assigned_to
-
-    def clean_period_of_stay(self):
-        period_of_stay = self.cleaned_data.get('period_of_stay')
-        if not period_of_stay:
-            raise forms.ValidationError('This field is required.')
-        return period_of_stay
-
-    def clean_brought_by(self):
-        brought_by = self.cleaned_data.get('brought_by')
-        if not brought_by:
-            raise forms.ValidationError('This field is required.')
-        return brought_by
-
-    def clean_baby_number(self):
-        baby_number = self.cleaned_data.get('baby_number')
-        if not baby_number:
-            raise forms.ValidationError('This field is required.')
-        return baby_number
-
-    def clean_time_in(self):
-        time_in = self.cleaned_data.get('time_in')
-        if not time_in:
-            raise forms.ValidationError('This field is required.')
-        return time_in
+        exclude = ['time_in']
 
 class DepartureForm(forms.ModelForm):
     class Meta:
@@ -332,90 +266,27 @@ class SalesForm(forms.ModelForm):
 class BabypaymentForm(forms.ModelForm):
     class Meta:
         model = Babypayment
-        fields = ['b_name', 'paid_on', 'full_day', 'half_day', 'monthly_h', 'monthly_f', 'amount_due', 'paid_amount', 'balance_left']
-
-    def clean_b_name(self):
-        b_name = self.cleaned_data.get('b_name')
-        if not b_name:
-            raise forms.ValidationError('This field is required.')
-        return b_name
-
-    def clean_paid_on(self):
-        paid_on = self.cleaned_data.get('paid_on')
-        if not paid_on:
-            raise forms.ValidationError('This field is required.')
-        return paid_on
-
-    def clean_full_day(self):
-        full_day = self.cleaned_data.get('full_day')
-        if not full_day:
-            raise forms.ValidationError('This field is required.')
-        return full_day
-
-    def clean_half_day(self):
-        half_day = self.cleaned_data.get('half_day')
-        if not half_day:
-            raise forms.ValidationError('This field is required.')
-        return half_day
-
-    def clean_monthly_h(self):
-        monthly_h = self.cleaned_data.get('monthly_h')
-        if not monthly_h:
-            raise forms.ValidationError('This field is required.')
-        return monthly_h
-
-    def clean_monthly_f(self):
-        monthly_f = self.cleaned_data.get('monthly_f')
-        if not monthly_f:
-            raise forms.ValidationError('This field is required.')
-        return monthly_f
-
-    def clean_amount_due(self):
-        amount_due = self.cleaned_data.get('amount_due')
-        if not amount_due:
-            raise forms.ValidationError('This field is required.')
-        return amount_due
-
-    def clean_paid_amount(self):
-        paid_amount = self.cleaned_data.get('paid_amount')
-        if not paid_amount:
-            raise forms.ValidationError('This field is required.')
-        return paid_amount
-
-    def clean_balance_left(self):
-        balance_left = self.cleaned_data.get('balance_left')
-        if not balance_left:
-            raise forms.ValidationError('This field is required.')
-        return balance_left
+        fields = ['b_name', 'paid_on', 'full_day', 'half_day', 'amount_due', 'paid_amount', 'balance_left']
+        widgets = {
+            'b_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'paid_on': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'full_day': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'half_day': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'amount_due': forms.NumberInput(attrs={'class': 'form-control'}),
+            'paid_amount': forms.NumberInput(attrs={'class': 'form-control'}),
+            'balance_left': forms.NumberInput(attrs={'class': 'form-control'}),
+        }
 
 class SitterpaymentForm(forms.ModelForm):
     class Meta:
         model = Sitterpayment
         fields = ['s_name', 'date', 'baby_count', 'amount']
-
-    def clean_s_name(self):
-        s_name = self.cleaned_data.get('s_name')
-        if not s_name:
-            raise forms.ValidationError('This field is required.')
-        return s_name
-
-    def clean_date(self):
-        date = self.cleaned_data.get('date')
-        if not date:
-            raise forms.ValidationError('This field is required.')
-        return date
-
-    def clean_baby_count(self):
-        baby_count = self.cleaned_data.get('baby_count')
-        if not baby_count:
-            raise forms.ValidationError('This field is required.')
-        return baby_count
-
-    def clean_amount(self):
-        amount = self.cleaned_data.get('amount')
-        if not amount:
-            raise forms.ValidationError('This field is required.')
-        return amount
+        widgets = {
+            's_name': forms.Select(attrs={'class': 'form-control'}),
+            'date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'baby_count': forms.NumberInput(attrs={'class': 'form-control'}),
+            'amount': forms.NumberInput(attrs={'class': 'form-control'}),
+        }
 
 class ItemForm(forms.ModelForm):
     class Meta:

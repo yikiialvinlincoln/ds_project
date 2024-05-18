@@ -1,0 +1,41 @@
+{% extends 'daycare/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4" style="text-align: center;"><b>ADD SITTER PAYMENT</b></h2>
+    <form method="post" class="needs-validation" novalidate>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        
+        <!-- Sitter Name -->
+        <div class="form-group">
+            <label for="{{ form.s_name.id_for_label }}">{{ form.s_name.label }}</label>
+            {{ form.s_name }}
+            {{ form.s_name.errors }}
+        </div>
+        
+        <!-- Date -->
+        <div class="form-group">
+            <label for="{{ form.date.id_for_label }}">{{ form.date.label }}</label>
+            {{ form.date }}
+            {{ form.date.errors }}
+        </div>
+        
+        <!-- Baby Count -->
+        <div class="form-group">
+            <label for="{{ form.baby_count.id_for_label }}">{{ form.baby_count.label }}</label>
+            {{ form.baby_count }}
+            {{ form.baby_count.errors }}
+        </div>
+        
+        <!-- Amount -->
+        <div class="form-group">
+            <label for="{{ form.amount.id_for_label }}">{{ form.amount.label }}</label>
+            {{ form.amount }}
+            {{ form.amount.errors }}
+        </div>
+
+        <button type="submit" class="btn btn-secondary mt-2">Submit</button>
+    </form>
+</div>
+{% endblock %}

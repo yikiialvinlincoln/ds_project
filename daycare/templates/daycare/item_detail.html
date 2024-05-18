@@ -1,4 +1,6 @@
+{% extends 'daycare/base.html' %}
 
+{% block content %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,3 +16,5 @@
     <a href="{% url 'delete_item' item.id %}">Delete</a>
 </body>
 </html>
+
+{% endblock %}

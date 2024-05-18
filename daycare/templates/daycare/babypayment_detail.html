@@ -1,25 +1,75 @@
 {% extends 'daycare/base.html' %}
 
 {% block content %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Payment Details</title>
-</head>
-<body>
-    <h1>Payment Details</h1>
-    <p>Baby Name: {{ babypayment.b_name }}</p>
-    <p>Paid On: {{ babypayment.paid_on }}</p>
-    <p>Full Day: {% if babypayment.full_day %}Yes{% else %}No{% endif %}</p>
-    <p>Half Day: {% if babypayment.half_day %}Yes{% else %}No{% endif %}</p>
-    <p>Monthly (Half): {% if babypayment.monthly_h %}Yes{% else %}No{% endif %}</p>
-    <p>Monthly (Full): {% if babypayment.monthly_f %}Yes{% else %}No{% endif %}</p>
-    <p>Amount Due: {{ babypayment.amount_due }}</p>
-    <p>Paid Amount: {{ babypayment.paid_amount }}</p>
-    <p>Balance Left: {{ babypayment.balance_left }}</p>
-    
-    <a href="{% url 'edit_babypayment' babypayment.id %}">Edit</a>
-    <a href="{% url 'delete_babypayment' babypayment.id %}">Delete</a>
-</body>
-</html>
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h1>Payment Details</h1>
+        </div>
+        <div class="card-body">
+            <form>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"><strong>Baby Name:</strong></label>
+                    <div class="col-sm-10">
+                        <p class="form-control-plaintext">{{ babypayment.b_name }}</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"><strong>Paid On:</strong></label>
+                    <div class="col-sm-10">
+                        <p class="form-control-plaintext">{{ babypayment.paid_on }}</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"><strong>Full Day:</strong></label>
+                    <div class="col-sm-10">
+                        <p class="form-control-plaintext">{% if babypayment.full_day %}Yes{% else %}No{% endif %}</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"><strong>Half Day:</strong></label>
+                    <div class="col-sm-10">
+                        <p class="form-control-plaintext">{% if babypayment.half_day %}Yes{% else %}No{% endif %}</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"><strong>Monthly (Half):</strong></label>
+                    <div class="col-sm-10">
+                        <p class="form-control-plaintext">{% if babypayment.monthly_h %}Yes{% else %}No{% endif %}</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"><strong>Monthly (Full):</strong></label>
+                    <div class="col-sm-10">
+                        <p class="form-control-plaintext">{% if babypayment.monthly_f %}Yes{% else %}No{% endif %}</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"><strong>Amount Due:</strong></label>
+                    <div class="col-sm-10">
+                        <p class="form-control-plaintext">{{ babypayment.amount_due }}</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"><strong>Paid Amount:</strong></label>
+                    <div class="col-sm-10">
+                        <p class="form-control-plaintext">{{ babypayment.paid_amount }}</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"><strong>Balance Left:</strong></label>
+                    <div class="col-sm-10">
+                        <p class="form-control-plaintext">{{ babypayment.balance_left }}</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-10 offset-sm-2">
+                        <a href="{% url 'edit_babypayment' babypayment.id %}" class="btn btn-primary">Edit</a>
+                        <a href="{% url 'delete_babypayment' babypayment.id %}" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}

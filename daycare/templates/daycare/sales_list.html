@@ -1,19 +1,35 @@
 {% extends 'daycare/base.html' %}
-{% block content %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Sales List</title>
-</head>
-<body>
-    <h1>Sales List</h1>
-    <ul>
-        {% for sale in sales %}
-            <li>{{ sale.doll.doll_name }} - {{ sale.b_name }} - {{ sale.date_sold }}</li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'add_sales' %}">Add Sale</a>
-</body>
-</html>
 
+{% block content %}
+<div class="container mt-4">
+    <h2>Sales List</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Doll</th>
+                <th>Baby</th>
+                <th>Quantity Sold</th>
+                <th>Unit Price</th>
+                <th>Total</th>
+                <th>Received Amount</th>
+                <th>Balance</th>
+                <th>Date Sold</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sale in sales_items %}
+            <tr>
+                <td>{{ sale.doll }}</td>
+                <td>{{ sale.b_name }}</td>
+                <td>{{ sale.quantity_sold }}</td>
+                <td>{{ sale.unit_price }}</td>
+                <td>{{ sale.comp_total }}</td>
+                <td>{{ sale.received_amount }}</td>
+                <td>{{ sale.comp_balance }}</td>
+                <td>{{ sale.date_sold }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

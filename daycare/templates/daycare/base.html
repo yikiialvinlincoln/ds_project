@@ -16,13 +16,32 @@
             color: white !important;
             text-decoration: none !important;
         }
+
+
+        body {
+            margin: 0;
+            padding-bottom: 60px; /* Height of the footer */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
     </style>
 </head>
 
 <body class="relative min-h-screen w-screen">
     <div class="grid grid-cols-10 min-h-screen">
         <div class="col-span-2">
-            <nav class="bg-black flex flex-col gap-2 p-4 text-white h-full">
+            <nav class="bg-black flex flex-col gap-2 p-4 text-white h-full" style="position: fixed !important; width: 20% !important;">
                 <a class="flex gap-2 items-center hover:bg-gray-800 cursor-pointer p-2" href="{% url 'home' %}"> <i class="fa fa-home"></i> Home </a>
                 <a class="flex gap-2 items-center hover:bg-gray-800 cursor-pointer p-2" href="{% url 'list_babies' %}"> <i class="fa fa-baby"></i> Babies </a>
                 <a class="flex gap-2 items-center hover:bg-gray-800 cursor-pointer p-2" href="{% url 'list_sitters' %}"> <i class="fa fa-user"></i> Sitters </a>
@@ -48,8 +67,8 @@
 
 
                 <div class="flex flex-col gap-2">
-                    <a class="flex gap-2 items-center hover:bg-gray-800 cursor-pointer p-2" href="{% url 'list_babypayments' %}"> <i class="fa fa-baby"></i> Baby Payments </a>
-                    <a class="flex gap-2 items-center hover:bg-gray-800 cursor-pointer p-2" href="{% url 'list_sitterpayments' %}"> <i class="fa fa-user"></i> Sitter Payments </a>
+                    <a class="flex gap-2 items-center hover:bg-gray-800 cursor-pointer p-2" href="{% url 'babypayments_list' %}"> <i class="fa fa-baby"></i> Baby Payments </a>
+                    <a class="flex gap-2 items-center hover:bg-gray-800 cursor-pointer p-2" href="{% url 'sitterpayments_list' %}"> <i class="fa fa-user"></i> Sitter Payments </a>
                     <a class="flex gap-2 items-center hover:bg-gray-800 cursor-pointer p-2" href="{% url 'list_sales' %}"> <i class="fa fa-shopping-cart"></i> Item Sales </a>
                 </div>
                 <a class="flex gap-2 items-center hover:bg-gray-800 cursor-pointer p-2" href="list_stock"> <i class="fa fa-box"></i> Stock </a>
@@ -62,7 +81,7 @@
             {% endblock %}
         </div>
     </div>
-    <footer class="absolute bottom-0 left-0 bg-black text-white text-center p-2 w-full">
+    <footer class="footer">
         <span> Copyright &copy; 2024 Daystar Daycare Center </span>
     </footer>
 </body>

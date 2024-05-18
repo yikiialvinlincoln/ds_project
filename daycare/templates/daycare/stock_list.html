@@ -1,16 +1,33 @@
+{% extends 'daycare/base.html' %}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Stock List</title>
-</head>
-<body>
-    <h1>Stock List</h1>
-    <ul>
-        {% for stock in stocks %}
-            <li>{{ stock.item_name }} - Quantity: {{ stock.quantity_in_stock }}</li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'add_stock' %}">Add Stock</a>
-</body>
-</html>
+{% block content %}
+<div class="container mt-4">
+    <h2>Stock List</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Purchased On</th>
+                <th>Quantity Bought</th>
+                <th>Amount (UGX)</th>
+                <th>Quantity Issued Out</th>
+                <th>Quantity In Stock</th>
+                <th>Available Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in stock_items %}
+            <tr>
+                <td>{{ stock.item_name }}</td>
+                <td>{{ stock.purchased_on }}</td>
+                <td>{{ stock.quantity_bought }}</td>
+                <td>{{ stock.amount_UGX }}</td>
+                <td>{{ stock.quantity_issued_out }}</td>
+                <td>{{ stock.quantity_in_stock }}</td>
+                <td>{{ stock.available_stock }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,30 +1,100 @@
 {% extends 'daycare/base.html' %}
 
+{% load custom_filters %}
+
 {% block content %}
+<style>
+    .reduced-width {
+        width: 50%; /* Adjust the percentage as needed to reduce the input field size */
+    }
+    
+</style>
 <div class="container mt-4">
-    <h2>Add Sitter</h2>
-    <form method="post">
+    <h2 class="mb-4">Add Sitter</h2>
+    <form method="post" class="needs-validation" novalidate>
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary mt-2">Submit</button>
+        {{ form.non_field_errors }}
+        
+        <!-- Sitter Name -->
+        <div class="form-group">
+            <label for="{{ form.s_name.id_for_label }}">{{ form.s_name.label }}</label>
+            {{ form.s_name|add_class:"form-control reduced-width" }}
+            {{ form.s_name.errors }}
+        </div>
+        
+        <!-- Location -->
+        <div class="form-group">
+            <label for="{{ form.location.id_for_label }}">{{ form.location.label }}</label>
+            {{ form.location|add_class:"form-control reduced-width" }}
+            {{ form.location.errors }}
+        </div>
+        
+        <!-- Date of Birth -->
+        <div class="form-group">
+            <label for="{{ form.date_of_birth.id_for_label }}">{{ form.date_of_birth.label }}</label>
+            {{ form.date_of_birth|add_class:"form-control reduced-width" }}
+            {{ form.date_of_birth.errors }}
+        </div>
+        
+        <!-- Gender -->
+        <div class="form-group">
+            <label for="{{ form.gender.id_for_label }}">{{ form.gender.label }}</label>
+            {{ form.gender|add_class:"form-control reduced-width" }}
+            {{ form.gender.errors }}
+        </div>
+        
+        <!-- Next of Kin -->
+        <div class="form-group">
+            <label for="{{ form.next_of_kin.id_for_label }}">{{ form.next_of_kin.label }}</label>
+            {{ form.next_of_kin|add_class:"form-control reduced-width" }}
+            {{ form.next_of_kin.errors }}
+        </div>
+        
+        <!-- NIN -->
+        <div class="form-group">
+            <label for="{{ form.nin.id_for_label }}">{{ form.nin.label }}</label>
+            {{ form.nin|add_class:"form-control reduced-width" }}
+            {{ form.nin.errors }}
+        </div>
+        
+        <!-- Recommender Name -->
+        <div class="form-group">
+            <label for="{{ form.recommender_name.id_for_label }}">{{ form.recommender_name.label }}</label>
+            {{ form.recommender_name|add_class:"form-control reduced-width" }}
+            {{ form.recommender_name.errors }}
+        </div>
+        
+        <!-- Religion -->
+        <div class="form-group">
+            <label for="{{ form.religion.id_for_label }}">{{ form.religion.label }}</label>
+            {{ form.religion|add_class:"form-control reduced-width" }}
+            {{ form.religion.errors }}
+        </div>
+        
+        <!-- Education Level -->
+        <div class="form-group">
+            <label for="{{ form.education_level.id_for_label }}">{{ form.education_level.label }}</label>
+            {{ form.education_level|add_class:"form-control reduced-width" }}
+            {{ form.education_level.errors }}
+        </div>
+        
+        <!-- Sitter Number -->
+        <div class="form-group">
+            <label for="{{ form.sitter_number.id_for_label }}">{{ form.sitter_number.label }}</label>
+            {{ form.sitter_number|add_class:"form-control reduced-width" }}
+            {{ form.sitter_number.errors }}
+        </div>
+        
+        <!-- Contact -->
+        <div class="form-group">
+            <label for="{{ form.contact.id_for_label }}">{{ form.contact.label }}</label>
+            {{ form.contact|add_class:"form-control reduced-width" }}
+            {{ form.contact.errors }}
+        </div>
+        
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-secondary mt-2">Submit</button>
     </form>
 </div>
+
 {% endblock %}
-
-
-
-
-{% comment %} <!DOCTYPE html>
-<html>
-<head>
-    <title>Add Sitter</title>
-</head>
-<body>
-    <h1>Add Sitter</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
-    </form>
-</body>
-</html> {% endcomment %}

@@ -1,0 +1,31 @@
+{% extends 'daycare/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 style="text-align: center;"><b>SITTER PAYMENTS</b></h2>
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Sitter Name</th>
+                <th>Date</th>
+                <th>Baby Count</th>
+                <th>Amount per Baby</th>
+                <th>Total Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for payment in sitterpayments %}
+            <tr>
+                <td>{{ payment.s_name }}</td>
+                <td>{{ payment.date }}</td>
+                <td>{{ payment.baby_count }}</td>
+                <td>{{ payment.amount }}</td>
+                <td>{{ payment.total_amount }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'add_sitter_payment' %}" class="btn btn-secondary mt-3">Add Payment</a>
+</div>
+{% endblock %}

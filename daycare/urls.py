@@ -56,15 +56,15 @@ urlpatterns = [
     path('sales/<int:sales_id>/delete/', views.delete_sales, name='delete_sales'),
 
     #Babypayment paths
-    path('babypayments/', views.list_babypayments, name='list_babypayments'),
-    path('babypayments/add/', views.add_babypayment, name='add_babypayment'),
+    path('babypayments/', views.babypayments_list, name='babypayments_list'),
+    path('add_babypayment/', views.add_babypayment, name='add_babypayment'),
     path('babypayments/<int:babypayment_id>/', views.view_babypayment, name='view_babypayment'),
     path('babypayments/<int:babypayment_id>/edit/', views.edit_babypayment, name='edit_babypayment'),
     path('babypayments/<int:babypayment_id>/delete/', views.delete_babypayment, name='delete_babypayment'),
 
     #Sitterpayment paths
-    path('sitterpayments/', views.list_sitterpayments, name='list_sitterpayments'),
-    path('sitterpayments/add/', views.add_sitterpayment, name='add_sitterpayment'),
+    path('sitterpayments/', views.sitterpayments_list, name='sitterpayments_list'),
+    path('add_sitter_payment/', views.add_sitter_payment, name='add_sitter_payment'),
     path('sitterpayments/<int:sitterpayment_id>/', views.view_sitterpayment, name='view_sitterpayment'),
     path('sitterpayments/<int:sitterpayment_id>/edit/', views.edit_sitterpayment, name='edit_sitterpayment'),
     path('sitterpayments/<int:sitterpayment_id>/delete/', views.delete_sitterpayment, name='delete_sitterpayment'),

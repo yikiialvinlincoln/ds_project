@@ -2,10 +2,10 @@
 
 {% block content %}
 <div class="container">
-    <h1 class="mb-4">Baby Details</h1>
+    <h1 class="mb-4" style="text-align: center;"><b>BABY DETAILS</b></h1>
     <div class="row">
         <div class="col-md-8 offset-md-2">
-            <table class="table table-bordered mt-4">
+            <table class="table table-bordered mt-1">
                 <tbody>
                     <tr>
                         <th>Name</th>
@@ -54,7 +54,7 @@
                 </tbody>
             </table>
             <div class="text-right"> <!-- Aligns content to the right -->
-                <a href="{% url 'list_sitters' %}" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back to List</a>
+                <a href="{% url 'list_sitters' %}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to List</a>
             </div>
         </div>
     </div>

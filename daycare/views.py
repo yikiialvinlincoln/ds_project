@@ -251,6 +251,7 @@ def list_sales(request):
 
 def add_sales(request):
     if request.method == 'POST':
+
         form = SalesForm(request.POST)
         if form.is_valid():
             form.save()
@@ -281,19 +282,19 @@ def delete_sales(request, sales_id):
         return redirect('list_sales')
     return render(request, 'daycare/sales_confirm_delete.html', {'sales': sales})
 
-def list_babypayments(request):
+def babypayments_list(request):
     babypayments = Babypayment.objects.all()
-    return render(request, 'daycare/babypayment_list.html', {'babypayments': babypayments})
+    return render(request, 'daycare/babypayments_list.html', {'babypayments': babypayments})
 
 def add_babypayment(request):
     if request.method == 'POST':
         form = BabypaymentForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('list_babypayments')
+            return redirect('babypayments_list')  # Ensure this URL pattern is defined
     else:
         form = BabypaymentForm()
-    return render(request, 'daycare/babypayment_form.html', {'form': form})
+    return render(request, 'daycare/add_babypayment.html', {'form': form})
 
 def view_babypayment(request, babypayment_id):
     babypayment = get_object_or_404(Babypayment, pk=babypayment_id)
@@ -318,19 +319,19 @@ def delete_babypayment(request, babypayment_id):
     return render(request, 'daycare/babypayment_confirm_delete.html', {'babypayment': babypayment})    
 
 
-def list_sitterpayments(request):
+def sitterpayments_list(request):
     sitterpayments = Sitterpayment.objects.all()
-    return render(request, 'daycare/sitterpayment_list.html', {'sitterpayments': sitterpayments})
+    return render(request, 'daycare/sitterpayments_list.html', {'sitterpayments': sitterpayments})
 
-def add_sitterpayment(request):
+def add_sitter_payment(request):
     if request.method == 'POST':
         form = SitterpaymentForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('list_sitterpayments')
+            return redirect('sitterpayments_list')
     else:
         form = SitterpaymentForm()
-    return render(request, 'daycare/sitterpayment_form.html', {'form': form})
+    return render(request, 'daycare/add_sitter_payment.html', {'form': form})
 
 def view_sitterpayment(request, sitterpayment_id):
     sitterpayment = get_object_or_404(Sitterpayment, pk=sitterpayment_id)
