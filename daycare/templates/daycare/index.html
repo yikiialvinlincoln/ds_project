@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +11,7 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background-image: url('https://images.fosterwebmarketing.com/917/How%20to%20pick%20the%20right%20daycare.png');
+            background-image: url('{% static 'images/index-pic.png' %}');
             background-size: cover;
             background-position: center;
             height: 100vh;
@@ -41,7 +42,7 @@
     </style>
 </head>
 <body>
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD1TvgBLY15y7cvgz36puX4w_huZL52bZ4uxUz4EhOGQ&s" alt="Logo" class="logo">
+    <img src="{% static 'images/logo-pic.png' %}" alt="Logo" class="logo">
     <div class="welcome-text">
         <h1>Welcome to Daystar Daycare Admin</h1>
         <p>Manage your daycare center with ease at the click of a button.</p>

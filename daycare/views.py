@@ -82,12 +82,12 @@ def add_sitter_attendance(request):
 def edit_sitter_attendance(request, attendance_id):
     attendance = get_object_or_404(Sitterattendance, pk=attendance_id)
     if request.method == 'POST':
-        form = SitterAttendanceForm(request.POST, instance=attendance)
+        form = SitterattendanceForm(request.POST, instance=attendance)
         if form.is_valid():
             form.save()
             return redirect('list_sitter_attendance')
     else:
-        form = SitterAttendanceForm(instance=attendance)
+        form = SitterattendanceForm(instance=attendance)
     return render(request, 'daycare/sitterattendance_form.html', {'form': form})
 
 def delete_sitter_attendance(request, attendance_id):

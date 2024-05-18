@@ -2,5 +2,16 @@
 
 {% block content %}
 
+<body>
+    <h1><b>Add a New Baby</b></h1>
+    <form method="post" action="{% url 'add_baby' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+    <a href="{% url 'list_babies' %}">Back to Babies List</a>
+</body>
+</html>
+
 {% endblock %}
 

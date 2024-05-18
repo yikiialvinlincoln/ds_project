@@ -1,69 +1,62 @@
 {% extends 'daycare/base.html' %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baby Details</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="container fluid">
-        <h1>Baby Details</h1>
-        <div class="row">
-            <div class="col-md-8 offset-md-2">
-        <table class="table table-bordered">
-            <tbody>
-                <tr>
-                    <th>Name</th>
-                    <td>{{ baby.b_name }}</td>
-                </tr>
-                <tr>
-                    <th>Gender</th>
-                    <td>{{ baby.get_gender_display }}</td>
-                </tr>
-                <tr>
-                    <th>Age</th>
-                    <td>{{ baby.age }}</td>
-                </tr>
-                <tr>
-                    <th>Location</th>
-                    <td>{{ baby.location }}</td>
-                </tr>
-                <tr>
-                    <th>Parents Names</th>
-                    <td>{{ baby.parents_names }}</td>
-                </tr>
-                <tr>
-                    <th>Fee in SHS</th>
-                    <td>{{ baby.fee_in_SHS }}</td>
-                </tr>
-                <tr>
-                    <th>Assigned To</th>
-                    <td>{{ baby.assigned_to }}</td>
-                </tr>
-                <tr>
-                    <th>Period of Stay</th>
-                    <td>{{ baby.period_of_stay }}</td>
-                </tr>
-                <tr>
-                    <th>Brought By</th>
-                    <td>{{ baby.brought_by }}</td>
-                </tr>
-                <tr>
-                    <th>Baby Number</th>
-                    <td>{{ baby.baby_number }}</td>
-                </tr>
-                <tr>
-                    <th>Time In</th>
-                    <td>{{ baby.time_in }}</td>
-                </tr>
-            </tbody>
-        </table>
+<div class="container">
+    <h1 class="mb-4">Baby Details</h1>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <table class="table table-bordered mt-4">
+                <tbody>
+                    <tr>
+                        <th>Name</th>
+                        <td>{{ baby.b_name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Gender</th>
+                        <td>{{ baby.get_gender_display }}</td>
+                    </tr>
+                    <tr>
+                        <th>Age</th>
+                        <td>{{ baby.age }}</td>
+                    </tr>
+                    <tr>
+                        <th>Location</th>
+                        <td>{{ baby.location }}</td>
+                    </tr>
+                    <tr>
+                        <th>Parents Names</th>
+                        <td>{{ baby.parents_names }}</td>
+                    </tr>
+                    <tr>
+                        <th>Fee in SHS</th>
+                        <td>{{ baby.fee_in_SHS }}</td>
+                    </tr>
+                    <tr>
+                        <th>Assigned To</th>
+                        <td>{{ baby.assigned_to }}</td>
+                    </tr>
+                    <tr>
+                        <th>Period of Stay</th>
+                        <td>{{ baby.period_of_stay }}</td>
+                    </tr>
+                    <tr>
+                        <th>Brought By</th>
+                        <td>{{ baby.brought_by }}</td>
+                    </tr>
+                    <tr>
+                        <th>Baby Number</th>
+                        <td>{{ baby.baby_number }}</td>
+                    </tr>
+                    <tr>
+                        <th>Time In</th>
+                        <td>{{ baby.time_in }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-right"> <!-- Aligns content to the right -->
+                <a href="{% url 'list_sitters' %}" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back to List</a>
+            </div>
+        </div>
     </div>
-</body>
-</html>
-
+</div>
 {% endblock %}
