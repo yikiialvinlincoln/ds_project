@@ -141,17 +141,16 @@ class Sitterpayment(models.Model):
         super().save(*args, **kwargs)       
 
 class Item(models.Model):
-    name = models.CharField(max_length=50,null=True,blank=True) 
+    name = models.CharField(max_length=50, null=True, blank=True) 
+
     def __str__(self):
         return self.name    
 
 class Stock(models.Model):
-    item_name = models.ForeignKey('Item', on_delete=models.CASCADE, null=True, blank=True) 
+    item_name = models.ForeignKey(Item, on_delete=models.CASCADE, null=True, blank=True)
     purchased_on = models.DateField(default=timezone.now)
-    quantity_bought = models.IntegerField(default=0)    
-    amount_UGX = models.IntegerField(default=0)
-    quantity_issued_out = models.IntegerField(default=0)   
-    quantity_in_stock = models.IntegerField(default=0)   
+    quantity_bought = models.IntegerField(default=0)
+    quantity_issued_out = models.IntegerField(default=0)
     
     def __str__(self):
         return str(self.item_name)
@@ -161,7 +160,11 @@ class Stock(models.Model):
         return self.quantity_bought - self.quantity_issued_out
 
 class Issuing(models.Model):
-    quantity_issued_out = models.IntegerField(default=0)            
+    stock = models.OneToOneField(Stock, on_delete=models.CASCADE, default=None)
+    quantity_issued_out = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"Issuing for {self.stock.item_name}"
         
 
 

@@ -53,7 +53,7 @@ urlpatterns = [
     path('sales/add/', views.add_sales, name='add_sales'),
     path('sales/<int:sales_id>/', views.view_sales, name='view_sales'),
     path('sales/<int:sales_id>/edit/', views.edit_sales, name='edit_sales'),
-    path('sales/<int:sales_id>/delete/', views.delete_sales, name='delete_sales'),
+    path('sales/delete/<int:sales_id>/', views.delete_sales, name='delete_sales'),
 
     #Babypayment paths
     path('babypayments/', views.babypayments_list, name='babypayments_list'),
@@ -77,11 +77,11 @@ urlpatterns = [
     path('items/<int:item_id>/delete/', views.delete_item, name='delete_item'),
 
    #Stock paths
-    path('stocks/', views.list_stock, name='list_stock'),
-    path('stocks/add/', views.add_stock, name='add_stock'),
-    path('stocks/<int:pk>/', views.view_stock, name='view_stock'),
-    path('stocks/<int:stock_id>/edit/', views.edit_stock, name='edit_stock'),
-    path('stocks/<int:stock_id>/delete/', views.delete_stock, name='delete_stock'),
+    path('stock/', views.list_stock, name='list_stock'),
+    path('stock/add/', views.add_stock, name='add_stock'),
+    path('stock/<int:stock_id>/', views.view_stock, name='view_stock'),
+    path('stock/edit/<int:stock_id>/', views.edit_stock, name='edit_stock'),
+    path('stock/delete/<int:stock_id>/', views.delete_stock, name='delete_stock'),
 
     #Issuing paths
     path('issuing/', views.list_issuing, name='list_issuing'),

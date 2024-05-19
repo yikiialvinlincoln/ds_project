@@ -6,7 +6,7 @@ class SitterpaymentAdmin(admin.ModelAdmin):
     list_display = ('s_name', 'date', 'baby_count', 'amount', 'total_amount')
  
 class StockAdmin(admin.ModelAdmin):
-    list_display = ('item_name', 'purchased_on', 'quantity_bought', 'amount_UGX', 'quantity_issued_out', 'quantity_in_stock', 'available_stock_display')
+    list_display = ('item_name', 'purchased_on', 'quantity_bought', 'quantity_issued_out', 'available_stock_display')
 
     def available_stock_display(self, obj):
         return obj.available_stock

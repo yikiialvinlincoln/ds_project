@@ -3,6 +3,7 @@
 {% block content %}
 <div class="container mt-4">
     <h2>Stock List</h2>
+    <a href="{% url 'add_stock' %}" class="btn btn-secondary mb-3">Add Stock</a>
     <table class="table">
         <thead>
             <tr>
@@ -11,20 +12,24 @@
                 <th>Quantity Bought</th>
                 <th>Amount (UGX)</th>
                 <th>Quantity Issued Out</th>
-                <th>Quantity In Stock</th>
                 <th>Available Stock</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            {% for stock in stock_items %}
+            {% for stock in stocks %}
             <tr>
                 <td>{{ stock.item_name }}</td>
                 <td>{{ stock.purchased_on }}</td>
                 <td>{{ stock.quantity_bought }}</td>
                 <td>{{ stock.amount_UGX }}</td>
                 <td>{{ stock.quantity_issued_out }}</td>
-                <td>{{ stock.quantity_in_stock }}</td>
                 <td>{{ stock.available_stock }}</td>
+                <td>
+                    <a href="{% url 'view_stock' stock.id %}" class="btn btn-info btn-sm">View</a>
+                    <a href="{% url 'edit_stock' stock.id %}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{% url 'delete_stock' stock.id %}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

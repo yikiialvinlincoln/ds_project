@@ -251,7 +251,6 @@ def list_sales(request):
 
 def add_sales(request):
     if request.method == 'POST':
-
         form = SalesForm(request.POST)
         if form.is_valid():
             form.save()
@@ -275,12 +274,12 @@ def edit_sales(request, sales_id):
         form = SalesForm(instance=sales)
     return render(request, 'daycare/sales_form.html', {'form': form})
 
-def delete_sales(request, sales_id):
-    sales = get_object_or_404(Sales, pk=sales_id)
+def delete_sales(request, sale_id):
+    sale = get_object_or_404(Sales, id=sale_id)
     if request.method == 'POST':
-        sales.delete()
+        sale.delete()
         return redirect('list_sales')
-    return render(request, 'daycare/sales_confirm_delete.html', {'sales': sales})
+    return render(request, 'daycare/delete_sales.html', {'sale': sale})
 
 def babypayments_list(request):
     babypayments = Babypayment.objects.all()
@@ -393,7 +392,7 @@ def delete_item(request, item_id):
 
 def list_stock(request):
     stocks = Stock.objects.all()
-    return render(request, 'daycare/stock_list.html', {'stocks': stocks})
+    return render(request, 'daycare/list_stock.html', {'stocks': stocks})
 
 def add_stock(request):
     if request.method == 'POST':
@@ -405,9 +404,9 @@ def add_stock(request):
         form = StockForm()
     return render(request, 'daycare/stock_form.html', {'form': form})
 
-def view_stock(request, pk):
-    stock = get_object_or_404(Stock, pk=pk)
-    return render(request, 'daycare/stock_detail.html', {'stock': stock})
+def view_stock(request, stock_id):
+    stock = get_object_or_404(Stock, pk=stock_id)
+    return render(request, 'daycare/view_stock.html', {'stock': stock})
 
 
 def edit_stock(request, stock_id):
