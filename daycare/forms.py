@@ -207,7 +207,7 @@ class ItemForm(forms.ModelForm):
 class StockForm(forms.ModelForm):
     class Meta:
         model = Stock
-        fields = ['item_name', 'purchased_on', 'quantity_bought','quantity_issued_out']
+        fields = ['item_name', 'purchased_on', 'quantity_bought']
 
 class IssuingForm(forms.ModelForm):
     class Meta:

@@ -6,9 +6,16 @@
     .form-label {
         margin-bottom: 0.5rem;
     }
+        input {
+            border: 2px solid black;
+        }
+        select {
+            border: 2px solid black;
+        }
+
 </style>
 <div class="container mt-4">
-    <h2 class="mb-4">Add Sitter</h2>
+    <h2 class="mb-4" style="font-size: 20px;"><b>Add Sitter</b></h2>
     <form method="post" class="needs-validation" novalidate>
         {% csrf_token %}
         {{ form.non_field_errors }}

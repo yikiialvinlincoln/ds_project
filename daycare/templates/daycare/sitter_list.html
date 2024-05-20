@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1>List of Sitters</h1>
+        <h1><b>List of Sitters</b></h1>
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">
                 <tr>
@@ -37,7 +37,7 @@
                             <a href="{% url 'edit_sitter' sitter.id %}" class="btn btn-warning btn-sm" title="Edit">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <button type="button" class="btn btn-danger btn-sm" title="Delete" data-toggle="modal" data-target="#deleteModal{{ sitter.id }}">
+                            {% comment %} <button type="button" class="btn btn-danger btn-sm" title="Delete" data-toggle="modal" data-target="#deleteModal{{ sitter.id }}">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
 
@@ -60,7 +60,7 @@
                                                 {% csrf_token %}
                                                 <button type="submit" class="btn btn-danger">Delete</button>
                                             </form>
-                                        </div>
+                                        </div> {% endcomment %}
                                     </div>
                                 </div>
                             </div>

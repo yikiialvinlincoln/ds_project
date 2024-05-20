@@ -160,11 +160,12 @@ class Stock(models.Model):
         return self.quantity_bought - self.quantity_issued_out
 
 class Issuing(models.Model):
-    stock = models.OneToOneField(Stock, on_delete=models.CASCADE, default=None)
+    stock = models.ForeignKey(Stock, on_delete=models.CASCADE)
     quantity_issued_out = models.IntegerField(default=0)
 
     def __str__(self):
         return f"Issuing for {self.stock.item_name}"
+
         
 
 

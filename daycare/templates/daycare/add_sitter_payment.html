@@ -1,8 +1,17 @@
 {% extends 'daycare/base.html' %}
 
 {% block content %}
+<style>
+    input {
+        border: 2px solid black !important;
+    }
+    select {
+        border: 2px solid black !important;
+    }
+    
+</style>
 <div class="container mt-4">
-    <h2 class="mb-4" style="text-align: center;"><b>ADD SITTER PAYMENT</b></h2>
+    <h2 class="mb-4" style="text-align: center; font-size:20px;"><b>ADD SITTER PAYMENT</b></h2>
     <form method="post" class="needs-validation" novalidate>
         {% csrf_token %}
         {{ form.non_field_errors }}

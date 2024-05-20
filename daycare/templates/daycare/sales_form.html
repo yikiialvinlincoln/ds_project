@@ -1,9 +1,19 @@
 {% extends 'daycare/base.html' %}
 {% block content %}
-<h2>Add/Edit Sale</h2>
+<style>
+  input {
+      border: 2px solid black;
+  }
+  select {
+      border: 2px solid black;
+  }
+  
+</style>
+<h2 style="font-size: 30px"><b>Add/Edit Sale</b></h2>
+</br>
 <form method="post">
   {% csrf_token %}
   {{ form.as_p }}
-  <button type="submit">Save</button>
+  <button type="submit" class="btn btn-secondary">Save</button>
 </form>
 {% endblock %}

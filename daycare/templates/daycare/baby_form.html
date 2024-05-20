@@ -1,15 +1,30 @@
 {% extends 'daycare/base.html' %}
 
 {% block content %}
-
+<style>
+    input {
+        border: 2px solid black;
+    }
+    select {
+        border: 2px solid black;
+    }
+    .btn {
+        border: 2px solid grey;
+        background-color: grey;
+        color: white;
+        border-radius: 4px;
+    }
+</style>
 <body>
-    <h1><b>Add a New Baby</b></h1>
+    <h1 style="font-size: 20px;"><b>Add New Baby</b></h1>
+</br>
     <form method="post" action="{% url 'add_baby' %}">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Submit</button>
+        <button type="submit" style="margin-left: 180px;" class="btn">Submit</button>
     </form>
-    <a href="{% url 'list_babies' %}">Back to Babies List</a>
+    <a href="{% url 'list_babies' %}" class="btn btn-secondary">Back to Babies List</a>
+
 </body>
 </html>
 

@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import StaytypeForm, SitterForm, BabyForm, DepartureForm, Doll_typeForm, DollForm, SalesForm, BabypaymentForm, SitterpaymentForm, ItemForm, StockForm, IssuingForm, SitterattendanceForm
+from django.db import transaction
 # from django.contrib import messages
 
 
@@ -422,9 +423,16 @@ def edit_stock(request, stock_id):
 
 def delete_stock(request, stock_id):
     stock = get_object_or_404(Stock, pk=stock_id)
+    issuings = Issuing.objects.filter(stock=stock)
+    
     if request.method == 'POST':
-        stock.delete()
-        return redirect('list_stock')
+        with transaction.atomic():
+            # Delete all related issuings
+            issuings.delete()
+            # Delete the stock
+            stock.delete()
+            return redirect('list_stock')
+    
     return render(request, 'daycare/stock_confirm_delete.html', {'stock': stock})    
 
 def list_issuing(request):
