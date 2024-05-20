@@ -12,6 +12,7 @@
                 <th>Baby Count</th>
                 <th>Amount per Baby</th>
                 <th>Total Amount</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -22,6 +23,14 @@
                 <td>{{ payment.baby_count }}</td>
                 <td>{{ payment.amount }}</td>
                 <td>{{ payment.total_amount }}</td>
+                <td>
+                    <a href="{% url 'view_sitterpayment' payment.id %}" class="btn btn-info btn-sm" title="View">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                    <a href="{% url 'edit_sitterpayment' payment.id %}" class="btn btn-warning btn-sm" title="Edit">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

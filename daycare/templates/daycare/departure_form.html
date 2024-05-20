@@ -18,14 +18,15 @@
     }
 </style>
 <body>
-    <h1><b>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Departure</b></h1>
+    <h1 style="font-size: 20px;"><b>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Departure</b></h1>
 </br>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-secondary">Submit</button>
     </form>
-    <a href="{% url 'list_departures' %}">Back to List</a>
+</br>
+    <a href="{% url 'list_departures' %}" class="btn btn-secondary">Back to List</a>
 </body>
 </html>
 

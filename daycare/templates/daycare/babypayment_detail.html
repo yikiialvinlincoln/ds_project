@@ -3,8 +3,8 @@
 {% block content %}
 <div class="container mt-4">
     <div class="card">
-        <div class="card-header">
-            <h1>Payment Details</h1>
+        <div class="card-header text-center">
+            <h1 class="h4"><b>PAYMENT DETAILS</b></h1>
         </div>
         <div class="card-body">
             <form>
@@ -33,18 +33,6 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label"><strong>Monthly (Half):</strong></label>
-                    <div class="col-sm-10">
-                        <p class="form-control-plaintext">{% if babypayment.monthly_h %}Yes{% else %}No{% endif %}</p>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label"><strong>Monthly (Full):</strong></label>
-                    <div class="col-sm-10">
-                        <p class="form-control-plaintext">{% if babypayment.monthly_f %}Yes{% else %}No{% endif %}</p>
-                    </div>
-                </div>
-                <div class="form-group row">
                     <label class="col-sm-2 col-form-label"><strong>Amount Due:</strong></label>
                     <div class="col-sm-10">
                         <p class="form-control-plaintext">{{ babypayment.amount_due }}</p>
@@ -62,11 +50,8 @@
                         <p class="form-control-plaintext">{{ babypayment.balance_left }}</p>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="col-sm-10 offset-sm-2">
-                        <a href="{% url 'edit_babypayment' babypayment.id %}" class="btn btn-primary">Edit</a>
-                        <a href="{% url 'delete_babypayment' babypayment.id %}" class="btn btn-danger">Delete</a>
-                    </div>
+                <div class="text-center mt-3">
+                    <a href="{% url 'babypayments_list' %}" class="btn btn-secondary" style="text-align: left;">Back to List</a>
                 </div>
             </form>
         </div>

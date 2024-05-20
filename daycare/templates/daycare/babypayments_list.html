@@ -1,8 +1,9 @@
 {% extends 'daycare/base.html' %}
 
 {% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <div class="container mt-4">
-    <h2 class="mb-4" style="text-align: center; font-size: 20px;"><b>BABY PAYMENTS</b></h2>
+    <h2 class="mb-4 text-center" style="font-size: 20px;"><b>BABY PAYMENTS</b></h2>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -13,6 +14,7 @@
                 <th>Amount Due</th>
                 <th>Paid Amount</th>
                 <th>Balance Left</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -25,10 +27,21 @@
                 <td>{{ payment.amount_due }}</td>
                 <td>{{ payment.paid_amount }}</td>
                 <td>{{ payment.balance_left }}</td>
+                <td>
+                    <a href="{% url 'view_babypayment' payment.id %}" class="btn btn-info btn-sm" title="View">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                    <a href="{% url 'edit_babypayment' payment.id %}" class="btn btn-warning btn-sm" title="Edit">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     <a href="{% url 'add_babypayment' %}" class="btn btn-secondary">Add Payment</a>
 </div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 {% endblock %}

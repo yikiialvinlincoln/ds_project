@@ -12,11 +12,12 @@ form p label {
 }
 </style>
 <body>
-    <h1>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Payment</h1>
+    <h1 style="font-size: 20px;"><b>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Payment</b></h1>
+</br>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Save</button>
+        <button type="submit" class="btn btn-secondary">Save</button>
     </form>
 </body>
 </html>

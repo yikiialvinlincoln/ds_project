@@ -110,9 +110,9 @@ class Babypayment(models.Model):
     paid_on = models.DateField(default=timezone.now)
     full_day = models.BooleanField(default=False, blank=True)       
     half_day = models.BooleanField(default=False, blank=True)       
-    amount_due = models.DecimalField(max_digits=15, decimal_places=1, blank=True)
-    paid_amount = models.DecimalField(max_digits=15, decimal_places=1) 
-    balance_left = models.DecimalField(max_digits=15, decimal_places=1, default=0, blank=True)
+    amount_due = models.DecimalField(max_digits=15, decimal_places=0, blank=True)
+    paid_amount = models.DecimalField(max_digits=15, decimal_places=0) 
+    balance_left = models.DecimalField(max_digits=15, decimal_places=0, default=0, blank=True)
 
     def __str__(self):
         return self.b_name

@@ -6,6 +6,9 @@ urlpatterns = [
     path('', views.index,name='indexpage'),
     # path('login/', auth_views.LoginView.as_view(template_name='daycare/login.html'), name='login'),
     path('home/', views.home, name='home'),
+    # path('', views.landing, name='landing'),  # Landing page view
+    # path('login/', views.login_view, name='login'),
+    # path('logout/', views.logout_view, name='logout'),
 
     #Sitter paths
     path('sitters/', views.list_sitters, name='list_sitters'),

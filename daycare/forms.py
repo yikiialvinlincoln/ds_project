@@ -37,11 +37,6 @@ class Doll_typeForm(forms.ModelForm):
         model = Doll_type
         fields = ['name']
 
-    def clean_name(self):
-        name = self.cleaned_data.get('name')
-        if not name:
-            raise forms.ValidationError('This field is required.')
-        return name
 
 class DollForm(forms.ModelForm):
     class Meta:

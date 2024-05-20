@@ -1,20 +1,36 @@
 {% extends 'daycare/base.html' %}
 
 {% block content %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Payment Details</title>
-</head>
-<body>
-    <h1>Payment Details</h1>
-    <p>Sitter Name: {{ sitterpayment.s_name }}</p>
-    <p>Date: {{ sitterpayment.date }}</p>
-    <p>Baby Count: {{ sitterpayment.baby_count }}</p>
-    <p>Amount: {{ sitterpayment.amount }}</p>
-    
-    <a href="{% url 'edit_sitterpayment' sitterpayment.id %}">Edit</a>
-    <a href="{% url 'delete_sitterpayment' sitterpayment.id %}">Delete</a>
-</body>
-</html>
+<div class="container mt-5">
+    <h1 class="mb-4" style="font-size: 25px;"><b>PAYMENT DETAILS</b></h1>
+    <div class="card">
+        <div class="card-body">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label"><strong>Sitter Name:</strong></label>
+                <div class="col-sm-10">
+                    <p class="form-control-plaintext">{{ sitterpayment.s_name }}</p>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label"><strong>Date:</strong></label>
+                <div class="col-sm-10">
+                    <p class="form-control-plaintext">{{ sitterpayment.date }}</p>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label"><strong>Baby Count:</strong></label>
+                <div class="col-sm-10">
+                    <p class="form-control-plaintext">{{ sitterpayment.baby_count }}</p>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label"><strong>Amount:</strong></label>
+                <div class="col-sm-10">
+                    <p class="form-control-plaintext">{{ sitterpayment.amount }}</p>
+                </div>
+            </div>
+        </div>
+            <a href="{% url 'edit_sitterpayment' sitterpayment.id %}" class="btn btn-secondary">Edit</a>
+    </div>
+</div>
 {% endblock %}

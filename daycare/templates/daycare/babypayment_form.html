@@ -1,0 +1,61 @@
+{% extends 'daycare/base.html' %}
+
+{% block content %}
+<style>
+    input {
+        border: 2px solid black !important;
+    }
+    select {
+        border: 2px solid black !important;
+    }
+    form p {
+        margin-bottom: 10px;
+    }
+
+    form p label {
+        display: block;
+        margin-bottom: 5px; 
+    }
+</style>
+<div class="container mt-5">
+    <h2 class="mb-4" style="font-size: 25px;"><b>Edit Baby Payment</b></h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="b_name">Baby Name:</label>
+            <input type="text" class="form-control" id="b_name" name="b_name" value="{{ babypayment.b_name }}">
+        </div>
+        <div class="form-group">
+            <label for="paid_on">Paid On:</label>
+            <input type="date" class="form-control" id="paid_on" name="paid_on" value="{{ babypayment.paid_on }}">
+        </div>
+        <div class="form-group">
+            <label for="full_day">Full Day:</label>
+            <select class="form-control" id="full_day" name="full_day">
+                <option value="True" {% if babypayment.full_day %}selected{% endif %}>Yes</option>
+                <option value="False" {% if not babypayment.full_day %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="half_day">Half Day:</label>
+            <select class="form-control" id="half_day" name="half_day">
+                <option value="True" {% if babypayment.half_day %}selected{% endif %}>Yes</option>
+                <option value="False" {% if not babypayment.half_day %}selected{% endif %}>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="amount_due">Amount Due:</label>
+            <input type="number" class="form-control" id="amount_due" name="amount_due" value="{{ babypayment.amount_due }}">
+        </div>
+        <div class="form-group">
+            <label for="paid_amount">Paid Amount:</label>
+            <input type="number" class="form-control" id="paid_amount" name="paid_amount" value="{{ babypayment.paid_amount }}">
+        </div>
+        <div class="form-group">
+            <label for="balance_left">Balance Left:</label>
+            <input type="number" class="form-control" id="balance_left" name="balance_left" value="{{ babypayment.balance_left }}">
+        </div>
+        <button type="submit" class="btn btn-secondary">Save Changes</button>
+    </form>
+</div>
+{% endblock %}
