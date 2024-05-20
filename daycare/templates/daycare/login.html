@@ -1,29 +1,83 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <title>Login Page</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: white;
+      display: flex;
+    }
+
+    .container {
+      max-width: 300px;
+      margin: 0 auto;
+      padding: 40px;
+      margin-top: 60px;
+      background-color: white;
+      border-radius: 30px;
+      border: 1px solid black;
+    }
+
+    h2 {
+      text-align: center;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 300px;
+
+    }
+
+
+    input[type="text"],
+    input[type="password"] {
+      padding: 10px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: black;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: grey;
+    }
+
+    .error {
+      color: red;
+    }
+
+  </style>
 </head>
+
 <body>
-    <div class="container mt-5">
-        <h2 class="mb-4 text-center">Login</h2>
-        <form method="post">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            {% if error %}
-                <div class="alert alert-danger">{{ error }}</div>
-            {% endif %}
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
-    </div>
-</body>
+  <div class="container">
+    <h2>Login from here</h2>
+    {% if error_message %}
+    <p class="error">{{ error_message }}</p>
+    {% endif %}
+    <form method="post">
+      {% csrf_token %}
+      <label for="username">Username:</label>
+      <input type="text" name="username" id="username" required placeholder="type your username here"><br>
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" required placeholder="type your password here"><br>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+  </body>
+
 </html>

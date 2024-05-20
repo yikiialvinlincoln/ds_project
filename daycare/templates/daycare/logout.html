@@ -1,0 +1,48 @@
+{% load static %}
+{% block content %}
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: white;
+        display: flex;
+    }
+
+    p {
+        margin-left: 40px;
+    }
+
+    .container {
+        max-width: 350px;
+        margin: 0 auto;
+        margin-top: 180px;
+        padding: 40px;
+        background-color: white;
+        border-radius: 30px;
+        height: 100px;
+        border: 1px solid black; 
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    }
+
+    button {
+        background-color: black;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 10px;
+        margin-top: 20px;
+        margin-left: 40px;
+    }
+
+    button:hover {
+        background-color: grey;
+    }
+</style>
+<form method="post" action="{% url 'logout' %}" class="container">
+    {% csrf_token %}
+    <p>Are you sure you want to log out?</p>
+    <button type="submit" name="confirm" value="yes">Yes</button>
+    <button type="submit" name="confirm" value="no">No</button>
+</form>
+{% endblock %}

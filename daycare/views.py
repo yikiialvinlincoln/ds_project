@@ -4,8 +4,9 @@ from .models import *
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import StaytypeForm, SitterForm, BabyForm, DepartureForm, Doll_typeForm, DollForm, SalesForm, BabypaymentForm, SitterpaymentForm, ItemForm, StockForm, IssuingForm, SitterattendanceForm
 from django.db import transaction
-# from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login as django_login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout as auth_logout
 
 
 # Create your views here.
@@ -13,21 +14,35 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     return render(request, 'daycare/index.html')
 
-# def login_view(request):
+def login(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            login(request, user)
-            return redirect('home')
+            django_login(request, user)
+            # Redirects to a success page or returns a success message
+            return redirect('home')  
         else:
-            return render(request, 'login.html', {'error': 'Invalid username or password'})
-    return render(request, 'daycare/login.html')
+            # Returns an invalid login message
+            return render(request, 'daycare/login.html', {'error_message': 'Invalid login'})
+    else:
+        return render(request, 'daycare/login.html')
+    
 
-# def logout_view(request):
-    logout(request)
-    return redirect('daycare/landing.html')
+def custom_logout(request):
+    if request.method == 'POST':
+        confirm_choice = request.POST.get('confirm')
+        if confirm_choice == 'yes':
+            # Performs logout
+            # Redirects you to the index page
+            return redirect('/')
+        elif confirm_choice == 'no':
+            # Redirects you to the dashboard
+            return redirect('home')
+    else:
+        # Handles the GET request
+        return render(request, 'daycare/logout.html')    
 
 @login_required
 def home(request):
