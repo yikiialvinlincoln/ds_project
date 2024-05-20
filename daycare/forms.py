@@ -88,7 +88,7 @@ class StockForm(forms.ModelForm):
 class IssuingForm(forms.ModelForm):
     class Meta:
         model = Issuing
-        fields = ['quantity_issued_out']
+        fields = ['stock', 'issued_to', 'quantity', 'issue_date']
 
     
 

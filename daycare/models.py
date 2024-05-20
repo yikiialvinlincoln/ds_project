@@ -160,10 +160,13 @@ class Stock(models.Model):
 
 class Issuing(models.Model):
     stock = models.ForeignKey(Stock, on_delete=models.CASCADE)
-    quantity_issued_out = models.IntegerField(default=0)
+    issued_to = models.CharField(max_length=100)
+    quantity = models.IntegerField()
+    issue_date = models.DateField()
 
     def __str__(self):
-        return f"Issuing for {self.stock.item_name}"
+        return f'{self.stock.name} issued to {self.issued_to}'
+    
 
 
 class CustomUserManager(BaseUserManager):
