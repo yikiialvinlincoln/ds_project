@@ -1,12 +1,30 @@
 {% extends 'daycare/base.html' %}
 
 {% block content %}
+<style>
+    input {
+        border: 2px solid black;
+    }
+    select {
+        border: 2px solid black;
+    }
+    form p {
+        margin-bottom: 10px;
+    }
+
+    form p label {
+        display: block;
+        margin-bottom: 5px; 
+    }
+    
+  </style>
 <div class="container mt-4">
-    <h2>Add Sitter Attendance</h2>
+    <h2 style="font-size: 20px;"><b>Add Sitter Attendance</b></h2>
+</br>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-primary mt-2">Submit</button>
+        <button type="submit" class="btn btn-secondary mt-2">Submit</button>
     </form>
 </div>
 {% endblock %}

@@ -1,11 +1,16 @@
 {% extends 'daycare/base.html' %}
 
 {% block content %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Payment</title>
-</head>
+<style>
+form p {
+    margin-bottom: 10px;
+}
+
+form p label {
+    display: block;
+    margin-bottom: 5px; 
+}
+</style>
 <body>
     <h1>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Payment</h1>
     <form method="post">

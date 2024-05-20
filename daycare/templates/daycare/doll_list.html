@@ -1,20 +1,22 @@
 {% extends 'daycare/base.html' %}
 
 {% block content %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Dolls</title>
-</head>
-<body>
-    <h1>Dolls</h1>
-    <ul>
-        {% for doll in dolls %}
-            <li>{{ doll.doll_name }}</li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'add_doll' %}">Add Doll</a>
-</body>
-</html>
-
+<div class="container mt-4">
+    <h2>Dolls</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Doll Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for doll in dolls %}
+                <tr>
+                    <td>{{ doll.doll_name }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'add_doll' %}" class="btn btn-secondary">Add Doll</a>
+</div>
 {% endblock %}

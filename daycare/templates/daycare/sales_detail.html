@@ -1,12 +1,41 @@
 {% extends 'daycare/base.html' %}
 {% block content %}
-<h2>Sale Details</h2>
-<p><strong>Doll:</strong> {{ sales.doll }}</p>
-<p><strong>Baby Name:</strong> {{ sales.b_name }}</p>
-<p><strong>Quantity Sold:</strong> {{ sales.quantity_sold }}</p>
-<p><strong>Unit Price:</strong> {{ sales.unit_price }}</p>
-<p><strong>Total:</strong> {{ sales.comp_total }}</p>
-<p><strong>Date Sold:</strong> {{ sales.date_sold }}</p>
-<a href="{% url 'edit_sales' sales.id %}">Edit</a>
-<a href="{% url 'delete_sales' sales.id %}">Delete</a>
+<div class="container">
+    <h1 class="mb-4" style="text-align: center; font-size: 30px;"><b>SALE DETAILS</b></h1>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <table class="table table-bordered mt-1">
+                <tbody>
+                    <tr>
+                        <th>Doll</th>
+                        <td>{{ sales.doll }}</td>
+                    </tr>
+                    <tr>
+                        <th>Baby Name</th>
+                        <td>{{ sales.b_name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Quantity Sold</th>
+                        <td>{{ sales.quantity_sold }}</td>
+                    </tr>
+                    <tr>
+                        <th>Unit Price</th>
+                        <td>{{ sales.unit_price }}</td>
+                    </tr>
+                    <tr>
+                        <th>Total</th>
+                        <td>{{ sales.comp_total }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date Sold</th>
+                        <td>{{ sales.date_sold }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-right">
+                <a href="{% url 'list_sales' %}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to Sales List</a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

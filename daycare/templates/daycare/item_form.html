@@ -1,17 +1,30 @@
 {% extends 'daycare/base.html' %}
 
 {% block content %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Item</title>
-</head>
+<style>
+    input {
+        border: 2px solid black;
+    }
+    select {
+        border: 2px solid black;
+    }
+    form p {
+        margin-bottom: 10px;
+    }
+
+    form p label {
+        display: block;
+        margin-bottom: 5px; 
+    }
+    
+  </style>
 <body>
-    <h1>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Item</h1>
+    <h1><b>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Item</b></h1>
+</br>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Save</button>
+        <button type="submit"  class="btn btn-secondary">Save</button>
     </form>
 </body>
 </html>

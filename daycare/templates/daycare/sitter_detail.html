@@ -1,71 +1,62 @@
 {% extends 'daycare/base.html' %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2 class="mb-4">Sitter Details</h2>
+<div class="container">
+    <h1 class="mb-4" style="text-align: center;"><b>SITTER DETAILS</b></h1>
     <div class="row">
-        <div class="col">
-            <label for="id_s_name" class="form-label">Name</label>
-            <input type="text" id="id_s_name" class="form-control" value="{{ sitter.s_name }}" aria-label="Sitter name" readonly>
-        </div>
-        <div class="col">
-            <label for="id_location" class="form-label">Location</label>
-            <input type="text" id="id_location" class="form-control" value="{{ sitter.location }}" aria-label="Sitter location" readonly>
+        <div class="col-md-8 offset-md-2">
+            <table class="table table-bordered mt-1">
+                <tbody>
+                    <tr>
+                        <th>Name</th>
+                        <td>{{ sitter.s_name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Location</th>
+                        <td>{{ sitter.location }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date of Birth</th>
+                        <td>{{ sitter.date_of_birth }}</td>
+                    </tr>
+                    <tr>
+                        <th>Gender</th>
+                        <td>{{ sitter.get_gender_display }}</td>
+                    </tr>
+                    <tr>
+                        <th>Next of Kin</th>
+                        <td>{{ sitter.next_of_kin }}</td>
+                    </tr>
+                    <tr>
+                        <th>NIN</th>
+                        <td>{{ sitter.nin }}</td>
+                    </tr>
+                    <tr>
+                        <th>Recommender Name</th>
+                        <td>{{ sitter.recommender_name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Religion</th>
+                        <td>{{ sitter.religion }}</td>
+                    </tr>
+                    <tr>
+                        <th>Education Level</th>
+                        <td>{{ sitter.education_level }}</td>
+                    </tr>
+                    <tr>
+                        <th>Sitter Number</th>
+                        <td>{{ sitter.sitter_number }}</td>
+                    </tr>
+                    <tr>
+                        <th>Contact</th>
+                        <td>{{ sitter.contact }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-right">
+                <a href="{% url 'list_sitters' %}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to List</a>
+            </div>
         </div>
     </div>
-    <div class="row mt-3">
-        <div class="col">
-            <label for="id_date_of_birth" class="form-label">Date of Birth</label>
-            <input type="text" id="id_date_of_birth" class="form-control" value="{{ sitter.date_of_birth }}" aria-label="Sitter date of birth" readonly>
-        </div>
-        <div class="col">
-            <label for="id_gender" class="form-label">Gender</label>
-            <input type="text" id="id_gender" class="form-control" value="{{ sitter.gender }}" aria-label="Sitter gender" readonly>
-        </div>
-    </div>
-    <div class="row mt-3">
-        <div class="col">
-            <label for="id_next_of_kin" class="form-label">Next of Kin</label>
-            <input type="text" id="id_next_of_kin" class="form-control" value="{{ sitter.next_of_kin }}" aria-label="Sitter next of kin" readonly>
-        </div>
-        <div class="col">
-            <label for="id_nin" class="form-label">NIN</label>
-            <input type="text" id="id_nin" class="form-control" value="{{ sitter.nin }}" aria-label="Sitter NIN" readonly>
-        </div>
-    </div>
-    <div class="row mt-3">
-        <div class="col">
-            <label for="id_recommender_name" class="form-label">Recommender Name</label>
-            <input type="text" id="id_recommender_name" class="form-control" value="{{ sitter.recommender_name }}" aria-label="Sitter recommender name" readonly>
-        </div>
-        <div class="col">
-            <label for="id_religion" class="form-label">Religion</label>
-            <input type="text" id="id_religion" class="form-control" value="{{ sitter.religion }}" aria-label="Sitter religion" readonly>
-        </div>
-    </div>
-    <div class="row mt-3">
-        <div class="col">
-            <label for="id_education_level" class="form-label">Education Level</label>
-            <input type="text" id="id_education_level" class="form-control" value="{{ sitter.education_level }}" aria-label="Sitter education level" readonly>
-        </div>
-        <div class="col">
-            <label for="id_sitter_number" class="form-label">Sitter Number</label>
-            <input type="text" id="id_sitter_number" class="form-control" value="{{ sitter.sitter_number }}" aria-label="Sitter number" readonly>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <label for="id_contact" class="form-label">Contact</label>
-            <input type="text" id="id_contact" class="form-control" value="{{ sitter.contact }}" aria-label="Sitter contact" readonly>
-        </div>
-    </div>
-
-    <!-- Buttons for editing and deletion -->
-    {% comment %} <div class="row mt-3">
-        <div class="col text-end">
-            <a href="{% url 'edit_sitter' sitter.id %}" class="btn btn-primary">Edit</a>
-            <a href="{% url 'delete_sitter' sitter.id %}" class="btn btn-danger">Delete</a>
-        </div>
-    </div> {% endcomment %}
 </div>
 {% endblock %}

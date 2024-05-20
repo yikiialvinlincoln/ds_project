@@ -1,14 +1,9 @@
 {% extends 'daycare/base.html' %}
 
 {% block content %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Doll Types</title>
-</head>
-<body>
-    <h1>Doll Types</h1>
-    <table>
+<div class="container mt-4">
+    <h2>Doll Types</h2>
+    <table class="table">
         <thead>
             <tr>
                 <th>Doll Type Name</th>
@@ -23,8 +18,6 @@
         </tbody>
     </table>
     
-    <a href="{% url 'add_doll_type' %}">Add Doll Type</a>
-</body>
-</html>
-
+    <a href="{% url 'add_doll_type' %}" class="btn btn-secondary">Add Doll Type</a>
+</div>
 {% endblock %}

@@ -55,17 +55,14 @@ class Baby(models.Model):
     def __str__(self):
         return self.b_name
 
-
-
 class Departure(models.Model):
-    b_name = models.ForeignKey(Baby,on_delete=models.CASCADE)
-    departure_time = models.DateTimeField()
+    b_name = models.ForeignKey(Baby, on_delete=models.CASCADE)
+    departure_time = models.DateTimeField(auto_now_add=True)
     picked_by = models.CharField(max_length=100)
     comment = models.TextField(blank=True)
-    timed_at = models.DateTimeField(auto_now_add=True)
-    
+
     def __str__(self):
-        return self.b_name
+        return f"{self.b_name} - {self.time_of_departure}"
 
 
 class Doll_type(models.Model):

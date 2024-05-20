@@ -7,7 +7,14 @@
     .reduced-width {
         width: 50%; /* Adjust the percentage as needed to reduce the input field size */
     }
-    
+    form p {
+        margin-bottom: 10px;
+    }
+
+    form p label {
+        display: block;
+        margin-bottom: 5px; 
+    }
 </style>
 <div class="container mt-4">
     <h2 class="mb-4">Add Sitter</h2>
@@ -94,6 +101,7 @@
         
         <!-- Submit Button -->
         <button type="submit" class="btn btn-secondary mt-2">Submit</button>
+        <a href="{% url 'list_sitters' %}" class="btn btn-secondary mt-2">Back to Sitter List</a>
     </form>
 </div>
 

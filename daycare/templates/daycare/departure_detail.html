@@ -1,23 +1,34 @@
 {% extends 'daycare/base.html' %}
 
 {% block content %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Departure Details</title>
-</head>
-<body>
-    <h1>Departure Details</h1>
-    <p>Baby Name: {{ departure.b_name }}</p>
-    <p>Departure Time: {{ departure.departure_time }}</p>
-    <p>Picked By: {{ departure.picked_by }}</p>
-    <p>Comment: {{ departure.comment }}</p>
-    
-    <a href="{% url 'edit_departure' departure.id %}">Edit</a>
-    <a href="{% url 'delete_departure' departure.id %}">Delete</a>
-</body>
-</html>
-
-{% endblock content %}
-
-
+<div class="container">
+    <h1 class="mb-4" style="text-align: center;"><b>DEPARTURE DETAILS</b></h1>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <table class="table table-bordered mt-1">
+                <tbody>
+                    <tr>
+                        <th>Baby Name</th>
+                        <td>{{ departure.b_name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Departure Time</th>
+                        <td>{{ departure.departure_time }}</td>
+                    </tr>
+                    <tr>
+                        <th>Picked By</th>
+                        <td>{{ departure.picked_by }}</td>
+                    </tr>
+                    <tr>
+                        <th>Comment</th>
+                        <td>{{ departure.comment }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-right">
+                <a href="{% url 'list_departures' %}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to Departure List</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

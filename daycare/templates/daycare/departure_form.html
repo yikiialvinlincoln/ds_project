@@ -1,17 +1,29 @@
 {% extends 'daycare/base.html' %}
 
 {% block content %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Departure</title>
-</head>
+<style>
+    input {
+        border: 2px solid black !important;
+    }
+    select {
+        border: 2px solid black !important;
+    }
+    form p {
+        margin-bottom: 10px;
+    }
+
+    form p label {
+        display: block;
+        margin-bottom: 5px; 
+    }
+</style>
 <body>
-    <h1>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Departure</h1>
+    <h1><b>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Departure</b></h1>
+</br>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Submit</button>
+        <button type="submit" class="btn btn-secondary">Submit</button>
     </form>
     <a href="{% url 'list_departures' %}">Back to List</a>
 </body>
