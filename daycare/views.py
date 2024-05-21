@@ -350,31 +350,30 @@ def add_sales(request):
 
 
 @login_required
-def view_sales(request, sales_id):
-    sales = get_object_or_404(Sales, pk=sales_id)
-    return render(request, 'daycare/sales_detail.html', {'sales': sales})
+def view_sales(request, pk):
+    sale = get_object_or_404(Sales, pk=pk)
+    return render(request, 'daycare/sales_detail.html', {'sale': sale})
 
 
 @login_required
-def edit_sales(request, sales_id):
-    sales = get_object_or_404(Sales, pk=sales_id)
+def edit_sales(request, pk):
+    sale = get_object_or_404(Sales, pk=pk)
     if request.method == 'POST':
-        form = SalesForm(request.POST, instance=sales)
+        form = SalesForm(request.POST, instance=sale)
         if form.is_valid():
             form.save()
-            return redirect('list_sales')
+            return redirect('view_sales', pk=sale.pk)
     else:
-        form = SalesForm(instance=sales)
+        form = SalesForm(instance=sale)
     return render(request, 'daycare/sales_form.html', {'form': form})
 
-
-@login_required
-def delete_sales(request, sale_id):
-    sale = get_object_or_404(Sales, id=sale_id)
-    if request.method == 'POST':
-        sale.delete()
-        return redirect('list_sales')
-    return render(request, 'daycare/delete_sales.html', {'sale': sale})
+# @login_required
+# def delete_sales(request, sale_id):
+#     sale = get_object_or_404(Sales, id=sale_id)
+#     if request.method == 'POST':
+#         sale.delete()
+#         return redirect('list_sales')
+#     return render(request, 'daycare/delete_sales.html', {'sale': sale})
 
 
 @login_required
@@ -518,7 +517,7 @@ def delete_item(request, item_id):
 @login_required
 def list_stock(request):
     stocks = Stock.objects.all()
-    return render(request, 'daycare/list_stock.html', {'stocks': stocks})
+    return render(request, 'daycare/stock_list.html', {'stocks': stocks})
 
 
 @login_required
@@ -534,38 +533,38 @@ def add_stock(request):
 
 
 @login_required
-def view_stock(request, stock_id):
-    stock = get_object_or_404(Stock, pk=stock_id)
-    return render(request, 'daycare/view_stock.html', {'stock': stock})
+def view_stock(request, pk):
+    stock = get_object_or_404(Stock, pk=pk)
+    return render(request, 'daycare/stock_detail.html', {'stock': stock})
 
 
 @login_required
-def edit_stock(request, stock_id):
-    stock = get_object_or_404(Stock, pk=stock_id)
+def edit_stock(request, pk):
+    stock = get_object_or_404(Stock, pk=pk)
     if request.method == 'POST':
         form = StockForm(request.POST, instance=stock)
         if form.is_valid():
             form.save()
-            return redirect('list_stock')
+            return redirect('view_stock', pk=stock.pk)
     else:
         form = StockForm(instance=stock)
     return render(request, 'daycare/stock_form.html', {'form': form})
 
 
 @login_required
-def delete_stock(request, stock_id):
-    stock = get_object_or_404(Stock, pk=stock_id)
-    issuings = Issuing.objects.filter(stock=stock)
+# def delete_stock(request, pk):
+#     stock = get_object_or_404(Stock, pk=pk)
+#     issuings = Issuing.objects.filter(stock=stock)
     
-    if request.method == 'POST':
-        with transaction.atomic():
-            # Delete all related issuings
-            issuings.delete()
-            # Delete the stock
-            stock.delete()
-            return redirect('list_stock')
+#     if request.method == 'POST':
+#         with transaction.atomic():
+#             # Delete all related issuings
+#             issuings.delete()
+#             # Delete the stock
+#             stock.delete()
+#             return redirect('list_stock')
     
-    return render(request, 'daycare/stock_confirm_delete.html', {'stock': stock})    
+#     return render(request, 'daycare/stock_confirm_delete.html', {'stock': stock})    
 
 
 @login_required

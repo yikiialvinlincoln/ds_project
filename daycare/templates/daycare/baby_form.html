@@ -52,7 +52,7 @@ select {
     <form method="post" action="{% url 'add_baby' %}" class="bby">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" style="margin-left: 180px;" class="btn">Submit</button>
+        <button type="submit" class="btn btn-secondary">Submit</button>
     </form>
     </div>
 

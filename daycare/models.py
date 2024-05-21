@@ -88,7 +88,8 @@ class Doll(models.Model):
         return self.doll_name      
 
 class Sales(models.Model):
-    doll = models.ForeignKey('Doll', on_delete=models.CASCADE, null=False, blank=False)
+    # doll = models.ForeignKey('Doll', on_delete=models.CASCADE, null=False, blank=False)
+    doll_type = models.ForeignKey('Doll_type', on_delete=models.CASCADE, null=True, blank=True)
     b_name = models.ForeignKey('Baby', on_delete=models.CASCADE)
     paid_by = models.CharField(max_length=200, null=True)
     quantity_sold = models.IntegerField(default=0)
@@ -97,7 +98,7 @@ class Sales(models.Model):
     unit_price = models.IntegerField(default=0)
     
     def __str__(self):
-        return f"Sale of {self.doll} to {self.b_name} on {self.date_sold}"
+        return f"Sale of {self.doll} ({self.doll_type}) to {self.b_name} on {self.date_sold}"
     
     @property
     def comp_total(self):
@@ -152,7 +153,7 @@ class Stock(models.Model):
     quantity_issued_out = models.IntegerField(default=0)
     
     def __str__(self):
-        return str(self.item_name)
+        return str(self.item_name.name) if self.item_name else "No Item Name"
 
     @property
     def available_stock(self):
@@ -165,7 +166,7 @@ class Issuing(models.Model):
     issue_date = models.DateField()
 
     def __str__(self):
-        return f'{self.stock.name} issued to {self.issued_to}'
+        return f'{self.stock} issued to {self.issued_to}'
     
 
 

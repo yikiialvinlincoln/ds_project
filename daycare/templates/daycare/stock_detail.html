@@ -1,23 +1,59 @@
 {% extends 'daycare/base.html' %}
 
 {% block content %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Stock Details</title>
-</head>
+<style>
+    input {
+        border: 2px solid black;
+    }
+    select {
+        border: 2px solid black;
+    }
+    .btn {
+        border: 2px solid grey;
+        background-color: grey;
+        color: white;
+        border-radius: 4px;
+    }
+    .container {
+        width: 580px;
+        height: 400px;
+        padding: 40px;
+        margin-top: 5px;
+        margin-bottom: 60px;
+        background-color: white;
+        border-radius: 30px;
+        margin-left: 260px;
+        border: 1px solid black; 
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);   
+    }
+    input[type="text"],
+    input[type="number"] {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+select {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    width: 100%; 
+}
+.bby {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 40px;
+
+}
+</style>
 <body>
-    <h1>Stock Details</h1>
+    <h1 style="text-align: center; font-size:25px;"><b>STOCK DETAILS</b></h1>
+    <div class="container">
     <p>Item Name: {{ stock.item_name }}</p>
     <p>Purchased On: {{ stock.purchased_on }}</p>
     <p>Quantity Bought: {{ stock.quantity_bought }}</p>
-    <p>Amount in UGX: {{ stock.amount_UGX }}</p>
-    <p>Quantity Issued Out: {{ stock.quantity_issued_out }}</p>
-    <p>Quantity in Stock: {{ stock.quantity_in_stock }}</p>
-    <p>Available Stock: {{ stock.available_stock }}</p>
     
-    <a href="{% url 'edit_stock' stock.id %}">Edit</a>
-    <a href="{% url 'delete_stock' stock.id %}">Delete</a>
+    <a href="{% url 'edit_stock' stock.id %}" class="btn btn-secondary">Edit</a>
+    </div>
 </body>
 </html>
 {% endblock %}

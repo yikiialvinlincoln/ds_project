@@ -7,7 +7,7 @@
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
             <tr>
-                <th>Doll</th>
+                <th>Doll_type</th>
                 <th>Baby Name</th>
                 <th>Quantity Sold</th>
                 <th>Unit Price</th>
@@ -19,7 +19,7 @@
         <tbody>
             {% for sale in sales %}
             <tr>
-                <td>{{ sale.doll }}</td>
+                <td>{{ sale.doll_type.name }}</td>
                 <td>{{ sale.b_name }}</td>
                 <td>{{ sale.quantity_sold }}</td>
                 <td>{{ sale.unit_price }}</td>

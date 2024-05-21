@@ -47,7 +47,7 @@ class DollForm(forms.ModelForm):
 class SalesForm(forms.ModelForm):
     class Meta:
         model = Sales
-        fields = ['doll', 'b_name', 'paid_by', 'quantity_sold', 'received_amount', 'date_sold', 'unit_price']
+        fields = ['doll_type', 'b_name', 'paid_by', 'quantity_sold', 'received_amount', 'date_sold', 'unit_price']
 
 class BabypaymentForm(forms.ModelForm):
     class Meta:

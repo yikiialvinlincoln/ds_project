@@ -3,30 +3,59 @@
 {% block content %}
 <style>
     input {
-        border: 2px solid black !important;
+        border: 2px solid black;
     }
     select {
-        border: 2px solid black !important;
+        border: 2px solid black;
     }
-    form p {
-        margin-bottom: 10px;
+    .btn {
+        border: 2px solid grey;
+        background-color: grey;
+        color: white;
+        border-radius: 4px;
     }
+    .container {
+        width: 580px;
+        height: 550px;
+        padding: 40px;
+        margin-top: 5px;
+        margin-bottom: 60px;
+        background-color: white;
+        border-radius: 30px;
+        margin-left: 260px;
+        border: 1px solid black; 
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);   
+    }
+    input[type="text"],
+    input[type="number"] {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+select {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    width: 100%; 
+}
+.bby {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 40px;
 
-    form p label {
-        display: block;
-        margin-bottom: 5px; 
-    }
+}
 </style>
 <body>
-    <h1 style="font-size: 20px;"><b>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Departure</b></h1>
+    <h1 style="font-size: 25px; text-align: center;"><b>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Departure</b></h1>
 </br>
+    <div class="container">
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-secondary">Submit</button>
     </form>
+    </div>
 </br>
-    <a href="{% url 'list_departures' %}" class="btn btn-secondary">Back to List</a>
 </body>
 </html>
 
