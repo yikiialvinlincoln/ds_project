@@ -88,7 +88,7 @@ class Doll(models.Model):
         return self.doll_name      
 
 class Sales(models.Model):
-    # doll = models.ForeignKey('Doll', on_delete=models.CASCADE, null=False, blank=False)
+    doll = models.ForeignKey('Doll', on_delete=models.CASCADE, null=False, blank=False)
     doll_type = models.ForeignKey('Doll_type', on_delete=models.CASCADE, null=True, blank=True)
     b_name = models.ForeignKey('Baby', on_delete=models.CASCADE)
     paid_by = models.CharField(max_length=200, null=True)

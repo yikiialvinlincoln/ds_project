@@ -14,7 +14,7 @@ class StockAdmin(admin.ModelAdmin):
     available_stock_display.short_description = 'Available Stock'
 
 class SalesAdmin(admin.ModelAdmin):
-    list_display = ('b_name', 'quantity_sold', 'unit_price', 'comp_total', 'received_amount', 'comp_balance', 'date_sold')
+    list_display = ('doll', 'b_name', 'quantity_sold', 'unit_price', 'comp_total', 'received_amount', 'comp_balance', 'date_sold')
 
     def comp_total(self, obj):
         return obj.comp_total
