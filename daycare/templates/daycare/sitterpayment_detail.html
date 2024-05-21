@@ -1,36 +1,79 @@
 {% extends 'daycare/base.html' %}
 
 {% block content %}
-<div class="container mt-5">
-    <h1 class="mb-4" style="font-size: 25px;"><b>PAYMENT DETAILS</b></h1>
-    <div class="card">
-        <div class="card-body">
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label"><strong>Sitter Name:</strong></label>
-                <div class="col-sm-10">
-                    <p class="form-control-plaintext">{{ sitterpayment.s_name }}</p>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label"><strong>Date:</strong></label>
-                <div class="col-sm-10">
-                    <p class="form-control-plaintext">{{ sitterpayment.date }}</p>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label"><strong>Baby Count:</strong></label>
-                <div class="col-sm-10">
-                    <p class="form-control-plaintext">{{ sitterpayment.baby_count }}</p>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label"><strong>Amount:</strong></label>
-                <div class="col-sm-10">
-                    <p class="form-control-plaintext">{{ sitterpayment.amount }}</p>
-                </div>
-            </div>
-        </div>
-            <a href="{% url 'edit_sitterpayment' sitterpayment.id %}" class="btn btn-secondary">Edit</a>
-    </div>
+<style>
+    /* Custom CSS to adjust column sizes and position submit button */
+    .form-label {
+        margin-bottom: 0.5rem;
+    }
+     input {
+            border: 2px solid black;
+    }
+    select {
+            border: 2px solid black;
+    }
+        form p {
+            margin-bottom: 10px !important;
+        }
+
+        form p label {
+            display: block;
+            margin-bottom: 5px !important; 
+        }
+        .container {
+            width: 580px;
+            height: 500px;
+            padding: 40px;
+            margin-top: 5px;
+            margin-bottom: 60px;
+            background-color: white;
+            border-radius: 30px;
+            margin-left: 200px;
+            border: 1px solid black; 
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);   
+        }
+        input[type="text"],
+        input[type="number"] {
+        padding: 10px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+    }
+    select {
+        padding: 10px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        width: 100%; 
+    }
+    .bby {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 40px;
+    
+    }
+</style>
+
+    <h1 class="mb-4" style="font-size: 25px; text-align: center;"><b>PAYMENT DETAILS</b></h1>
+    <div class="container mt-5">
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th scope="row"><strong>Sitter Name:</strong></th>
+                <td>{{ sitterpayment.s_name }}</td>
+            </tr>
+            <tr>
+                <th scope="row"><strong>Date:</strong></th>
+                <td>{{ sitterpayment.date }}</td>
+            </tr>
+            <tr>
+                <th scope="row"><strong>Baby Count:</strong></th>
+                <td>{{ sitterpayment.baby_count }}</td>
+            </tr>
+            <tr>
+                <th scope="row"><strong>Amount:</strong></th>
+                <td>{{ sitterpayment.amount }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="{% url 'edit_sitterpayment' sitterpayment.id %}" class="btn btn-secondary">Edit</a>
 </div>
 {% endblock %}
